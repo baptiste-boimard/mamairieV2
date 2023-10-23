@@ -1,0 +1,36 @@
+# TEST ENDPOINT SIGNUP
+POST http://localhost:3000/signup HTTP/1.1
+Content-Type: application/json
+
+{
+    "pseudo": "Zelda",
+    "insee":"02356",
+    "password":"Froro123@",
+    "email": "kirikou@gmail.com"
+}
+
+###
+
+# TEST ENDPOINT LOGIN 
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "ddddd@gmail.com",
+    "password":"Froro123@"
+}
+
+###
+
+# TEST ENDPOINT LOGIN 
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "ddddd@gmail.com",
+    "password":"Froro123@"
+}
+
+###
+# APIDOCS
+GET http://localhost:3000/apidocs
