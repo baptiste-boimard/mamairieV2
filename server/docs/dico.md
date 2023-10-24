@@ -4,32 +4,32 @@
 
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-| id_admin| INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Identifiant |
+| admin_id| INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Identifiant |
 | pseudo | CHAR(20) | NOT NULL | Ppseudo utilisateur admin |
 | password | TEXT | NOT NULL | Password de l'utilisateur admin |
 | email | TEXT | NOT NULL UNIQUE| Email de l'utilisateur admin |
-| mairie_id | INT | REFERENCES mairie(id_mairie) | Idendifiant de la mairie |
+| town_hall_id | INT | REFERENCES town_hall(id_town_hall) | Idendifiant de la town_hall |
 | created_at | TIMESTAMPTZ | DEFAULT NOW()| Création date |
 | updated_at | TIMESTAMPTZ | | Mise à jour date|
 
-## Table SIGNALEMENT
+## Table REPORTING
 
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-| id_signalement | INT |GENERATED ALWAYS AS IDENTITY PRIMARY KEY| Idendifiant |
-| titre | VARCHAR(50) | NOT NULL | Titre du signalement |
+| reporting_id | INT |GENERATED ALWAYS AS IDENTITY PRIMARY KEY| Idendifiant |
+| title | VARCHAR(50) | NOT NULL | title du signalement |
 | email | TEXT | NOT NULL | Email du visiteur |
-| telephone | CHAR(10) | NOT NULL | Téléphone du visiteur |
-| prenom | TEXT | NOT NULL | Prénom du visiteur |
-| nom | TEXT | NOT NULL | Nom du visiteur |
+| phonenumber | CHAR(10) | NOT NULL | Téléphone du visiteur |
+| firstname | TEXT | NOT NULL | Prélastname du visiteur |
+| lastname | TEXT | NOT NULL | lastname du visiteur |
 | description | TEXT |NOT NULL | Description du signalement par le visiteur |
-| ip | TEXT | NOT NULL | Adresse IP du visiteur |
-| image | TEXT | | Adresse de stockage de l'image ajoutée par le visiteur |
+| ip | TEXT | NOT NULL | address IP du visiteur |
+| image | TEXT | | address de stockage de l'image ajoutée par le visiteur |
 | admin_text | TEXT | | Réponse de l'admin |
-| admin_image | TEXT | | Adresse de stockage de l'image ajoutée par l'admin |
-| signalement_categorie_id | TEXT | REFERENCES signalement_categorie(id_signalement_categorie) | Idendifiant de la catégorie du signalement |
-| signalement_statut_id | TEXT | REFERENCES signalement_status(id_signalement_status) | Idendifiant du status du signalement |
-| mairie_id | INT | REFERENCES mairie(id_mairie) | Idendifiant de la mairie |
+| admin_image | TEXT | | address de stockage de l'image ajoutée par l'admin |
+| reporting_category_id | TEXT | REFERENCES signalement_categorie(id_signalement_categorie) | Idendifiant de la catégorie du signalement |
+| reporting_status_id | TEXT | REFERENCES signalement_status(id_signalement_status) | Idendifiant du status du signalement |
+| town_hall_id | INT | REFERENCES town_hall(id_town_hall) | Idendifiant de la town_hall |
 | created_at | TIMESTAMPTZ | DEFAULT NOW() | Création date |
 | updated_at | TIMESTAMPTZ | | Mise à jour date |
 
@@ -39,13 +39,13 @@
 
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-| id_article | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
-| titre | VARCHAR(40) | NOT NULL | Titre de l'article |
+| article_id | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
+| title | VARCHAR(40) | NOT NULL | title de l'article |
 | description | TEXT | NOT NULL | Texte de l'article |
-| resume | TEXT | | Résumé de l'article |
-| image | TEXT | | Adresse de l'image de l'article |
-| auteur | TEXT | NOT NULL | Auteur de l'article |
-| admin_id | INT | | REFERENCES admin(id_admin) | Idendifiant de la mairie |
+| summary | TEXT | | Résumé de l'article |
+| image | TEXT | | address de l'image de l'article |
+| author | TEXT | NOT NULL | Auteur de l'article |
+| admin_id | INT | | REFERENCES admin(id_admin) | Idendifiant de la town_hall |
 | created_at | TIMESTAMPTZ | DEFAULT NOW() | Création date |
 | updated_at | TIMESTAMPTZ | | Mise à jour date |
 
@@ -54,58 +54,58 @@
 
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-| id_service | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
-| nom | TEXT | NOT NULL | Nom du service |
-| telephone | CHAR(10) | NOT NULL | Téléphone du service |
-| adresse | TEXT | NOT NULL | Adresse du service |
+| service_id | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
+| name | TEXT | NOT NULL | lastname du service |
+| phonenumber | CHAR(10) | NOT NULL | Téléphone du service |
+| address | TEXT | NOT NULL | address du service |
 | email | TEXT | NOT NULL | Email du service |
-| image | TEXT | | Adresse de l'image de la photo du service |
-| mairie_id | INT | REFERENCES mairie(id_mairie) | Idendifiant de la mairie |
+| image | TEXT | | address de l'image de la photo du service |
+| town_hall_id | INT | REFERENCES town_hall(id_town_hall) | Idendifiant de la town_hall |
 | created_at | TIMESTAMPTZ | DEFAULT NOW() | Création date |
 | updated_at | TIMESTAMPTZ | | Mise à jour date |
 
 
-## Table MAIRIE
+## Table TOWN_HALL
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-|id_mairie | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Identifiant |
-| nom | TEXT | NOT NULL UNIQUE | nom de la mairie |
-| adresse | TEXT | NOT NULL | Adresse de la mairie |
-| telephone | CHAR(10) | |Téléphone de la mairie |
-| horaire | TEXT | | Horaires de la mairie |
-| email | TEXT | | Email de la mairie |
-| insee | TEXT | NOT NULL UNIQUE | Numéros insee de la mairie |
+|town_hall_id | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Identifiant |
+| name | TEXT | NOT NULL UNIQUE | lastname de la town_hall |
+| address | TEXT | NOT NULL | address de la town_hall |
+| phonenumber | CHAR(10) | |Téléphone de la town_hall |
+| hourly | TEXT | | Horaires de la town_hall |
+| email | TEXT | | Email de la town_hall |
+| insee | TEXT | NOT NULL UNIQUE | Numéros insee de la town_hall |
 | created_at | TIMESTAMPTZ | DEFAULT NOW() | Création date |
 | updated_at | TIMESTAMPTZ | | Mise à jour date |
 
-## Table PERSONNEL_MAIRIE
+## Table TOWN_HALL_STAFF
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-| id_personnel_mairie | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Identifiant |
-| prenom | TEXT | NOT NULL | Prénom de la personne |
-| nom | TEXT | NOT NULL | Nom de la personne |
+| town_hall_staff_id | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Identifiant |
+| firstname | TEXT | NOT NULL | Prélastname de la personne |
+| lastname | TEXT | NOT NULL | lastname de la personne |
 | role | TEXT | NOT NULL | Fonction de la personne |
-| photo | TEXT | | Adresse de la photo de la personne |
-| mairie_id | INT | REFERENCES mairie(mairie_id) | Idendifiant de la mairie |
+| photo | TEXT | | address de la photo de la personne |
+| town_hall_id | INT | REFERENCES town_hall(town_hall_id) | Idendifiant de la town_hall |
 | created_at | TIMESTAMPTZ | DEFAULT NOW() | Création date |
 | updated_at | TIMESTAMPTZ | | Mise à jour date |
 
-## Table ARTICLE_CATEGORIE
+## Table ARTICLE_CATEGORY
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-| id_article_categorie | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
-| nom | TEXT | NOT NULL | nom de la catégorie |
-| couleur_hex | TEXT | NOT NULL | Code hexadécimale de la couleur |
+| article_category_id | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
+| name | TEXT | NOT NULL | lastname de la catégorie |
+| hex_color | TEXT | | Code hexadécimale de la couleur |
 
-## Table SIGNALEMENT_STATUS
+## Table REPORTING_STATUS
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-| id_ signalement_status | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
-| nom | TEXT | NOT NULL | Nom du status |
+| reporting_status_id | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
+| name | TEXT | NOT NULL | lastname du status |
 
-## Table SIGNALEMENT_CATEGORIE
+## Table REPORTING_CATEGORY
 | Champ | Type | Spécificités | Description | 
 | :--------------- |:-----------:| -----:|------:|
-| id_signalement_categorie | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
-| nom | TEXT | NOT NULL | Nom de la catégorie |
-| couleur_hex | TEXT | NOT NULL | Code hexadécimale de la couleur |
+| reporting_category_id | INT | GENERATED ALWAYS AS IDENTITY PRIMARY KEY | Idendifiant |
+| name | TEXT | NOT NULL | lastname de la catégorie |
+| hex_color | TEXT | NOT NULL | Code hexadécimale de la couleur |

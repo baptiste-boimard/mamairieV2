@@ -6,3 +6,6 @@
 3.Create_Index 2023-10-23T16:17:49Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout d'index pour les signalements et le personnel
 4.Add_mairie_data_in_DB 2023-10-23T16:40:48Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout de données pour la table mairie
 5.Add_data_in_DB 2023-10-24T07:34:43Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout de données pour la table signalement et personnel_mairie
+6.Add_reporting_category_in_DB 2023-10-24T19:42:50Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout de données pour la table reporting_category
+7.Add_reporting_in_DB 2023-10-24T19:54:41Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout de données pour la table reporting
+8.Add_townhallstaff_in_DB 2023-10-24T20:20:01Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout de données pour la table town_hall_staff

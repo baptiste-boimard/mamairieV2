@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP TABLE IF EXISTS mairie, admin, article, service, personnel_mairie, article_categorie, signalement_status, signalement_categorie, signalement CASCADE;
+DROP TABLE IF EXISTS town_hall, admin, article, service, town_hall_staff, article_category, reporting_status, reporting_category, reporting CASCADE;
 
 COMMIT;

@@ -1,15 +1,15 @@
--- Verify mamairieV2_sqitch:2.Create_Tables on pg
+-- Verify matown_hallV2_sqitch:2.Create_Tables on pg
 
 BEGIN;
 
-SELECT "id_mairie", "nom", "adresse", "telephone", "horaire", "email", "insee", "created_at", "updated_at" FROM mairie;
-SELECT "id_admin", "pseudo", "password", "email", "mairie_id", "created_at", "updated_at" FROM admin;
-SELECT "id_article", "titre", "description", "resume", "image", "auteur", "admin_id", "created_at", "updated_at" FROM article;
-SELECT "id_service", "nom", "telephone", "adresse", "email", "image", "mairie_id", "created_at", "updated_at" FROM service;
-SELECT "id_personnel_mairie", "prenom", "nom", "role", "photo", "mairie_id", "created_at", "updated_at" FROM personnel_mairie;
-SELECT "id_article_categorie", "nom", "couleur_hex", "created_at", "updated_at" FROM article_categorie;
-SELECT "id_signalement_status", "nom", "created_at", "updated_at" FROM signalement_status;
-SELECT "id_signalement_categorie", "nom", "couleur_hex", "created_at", "updated_at" FROM signalement_categorie;
-SELECT "id_signalement", "titre", "email", "telephone", "prenom", "nom", "description", "ip", "image", "admin_text", "admin_image", "signalement_categorie_id", "signalement_status_id", "mairie_id", "created_at", "updated_at" FROM signalement;
+SELECT "town_hall_id", "name", "address", "phonenumber", "hourly", "email", "insee", "created_at", "updated_at" FROM town_hall;
+SELECT "admin_id", "pseudo", "password", "email", "town_hall_id", "created_at", "updated_at" FROM admin;
+SELECT "article_id", "title", "description", "summary", "image", "author", "admin_id", "created_at", "updated_at" FROM article;
+SELECT "service_id", "name", "phonenumber", "address", "email", "image", "town_hall_id", "created_at", "updated_at" FROM service;
+SELECT "town_hall_staff_id", "firstname", "lastname", "role", "photo", "town_hall_id", "created_at", "updated_at" FROM town_hall_staff;
+SELECT "article_category_id", "name", "hex_color", "created_at", "updated_at" FROM article_category;
+SELECT "reporting_status_id", "name", "created_at", "updated_at" FROM reporting_status;
+SELECT "reporting_category_id", "name", "hex_color", "created_at", "updated_at" FROM reporting_category;
+SELECT "reporting_id", "title", "email", "phonenumber", "firstname", "lastname", "description", "ip", "image", "admin_text", "admin_image", "reporting_category_id", "reporting_status_id", "town_hall_id", "created_at", "updated_at" FROM reporting;
 
 ROLLBACK;

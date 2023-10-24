@@ -2,7 +2,7 @@
 
 BEGIN;
 
-CREATE INDEX signalement_index ON signalement (description, admin_text);
-CREATE INDEX personnel_mairie_index ON personnel_mairie (id_personnel_mairie, prenom, nom, role, photo);
+CREATE INDEX reporting_index ON reporting (description, admin_text);
+CREATE INDEX town_hall_staff_index ON town_hall_staff (town_hall_staff_id, firstname, lastname, role, photo);
 
 COMMIT;

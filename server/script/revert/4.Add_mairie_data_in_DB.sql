@@ -2,7 +2,7 @@
 
 BEGIN;
 
-DELETE FROM mairie WHERE nom = 'Mairie de Theillement';
-DELETE FROM mairie WHERE nom = 'Mairie de Paris';
+DELETE FROM town_hall WHERE name = 'Mairie de Theillement';
+DELETE FROM town_hall WHERE name = 'Mairie de Paris';
 
 COMMIT;

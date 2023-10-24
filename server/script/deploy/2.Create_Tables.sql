@@ -3,31 +3,31 @@
 BEGIN;
 
 
-CREATE TABLE IF NOT EXISTS public.mairie (
-  "id_mairie" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "nom" TEXT NOT NULL UNIQUE,
-  "adresse" TEXT NOT NULL,
-  "telephone" CHAR(10),
-  "horaire" TEXT,
+CREATE TABLE IF NOT EXISTS public.town_hall (
+  "town_hall_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT NOT NULL UNIQUE,
+  "address" TEXT NOT NULL,
+  "phonenumber" CHAR(10),
+  "hourly" TEXT,
   "email" TEXT,
   "insee" TEXT NOT NULL UNIQUE,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ
 );
 
-ALTER TABLE IF EXISTS public.mairie
+ALTER TABLE IF EXISTS public.town_hall
     OWNER to "mamairieV2";
 
 CREATE TABLE IF NOT EXISTS public.admin (
-  "id_admin" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "admin_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   "pseudo" VARCHAR(20) UNIQUE,
   "password" TEXT NOT NULL,
   "email" TEXT NOT NULL UNIQUE,
-  "mairie_id" INT NOT NULL, 
+  "town_hall_id" INT NOT NULL, 
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,
-  CONSTRAINT mairie_id_fk FOREIGN KEY (mairie_id)
-    REFERENCES public.mairie (id_mairie) MATCH SIMPLE
+  CONSTRAINT town_hall_id_fk FOREIGN KEY (town_hall_id)
+    REFERENCES public.town_hall (town_hall_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID
@@ -37,17 +37,17 @@ ALTER TABLE IF EXISTS public.admin
   OWNER to "mamairieV2";
 
 CREATE TABLE IF NOT EXISTS public.article (
-  "id_article" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "titre"  VARCHAR(40) NOT NULL,
+  "article_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "title"  VARCHAR(40) NOT NULL,
   "description" TEXT NOT NULL,
-  "resume" TEXT,
+  "summary" TEXT,
   "image" TEXT,
-  "auteur" TEXT NOT NULL,
+  "author" TEXT NOT NULL,
   "admin_id" INT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,
   CONSTRAINT admin_id_fk FOREIGN KEY (admin_id)
-    REFERENCES public.admin (id_admin) MATCH SIMPLE
+    REFERENCES public.admin (admin_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID
@@ -57,17 +57,17 @@ ALTER TABLE IF EXISTS public.article
   OWNER to "mamairieV2";
 
 CREATE TABLE IF NOT EXISTS public.service ( 
-  "id_service" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "nom" TEXT NOT NULL,
-  "telephone" CHAR(10) NOT NULL ,
-  "adresse" TEXT NOT NULL ,
+  "service_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "phonenumber" CHAR(10) NOT NULL ,
+  "address" TEXT NOT NULL ,
   "email" TEXT NOT NULL ,
   "image" TEXT,
-  "mairie_id" INT NOT NULL,
+  "town_hall_id" INT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,
-  CONSTRAINT mairie_id_fk FOREIGN KEY (mairie_id)
-    REFERENCES public.mairie (id_mairie) MATCH SIMPLE
+  CONSTRAINT town_hall_id_fk FOREIGN KEY (town_hall_id)
+    REFERENCES public.town_hall (town_hall_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID
@@ -76,94 +76,94 @@ CREATE TABLE IF NOT EXISTS public.service (
 ALTER TABLE IF EXISTS public.service
   OWNER to "mamairieV2";
 
-CREATE TABLE IF NOT EXISTS public.personnel_mairie (
-  "id_personnel_mairie" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "prenom" TEXT NOT NULL,
-  "nom" TEXT NOT NULL,
+CREATE TABLE IF NOT EXISTS public.town_hall_staff (
+  "town_hall_staff_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "firstname" TEXT NOT NULL,
+  "lastname" TEXT NOT NULL,
   "role" TEXT NOT NULL,
   "photo" TEXT,
-  "mairie_id" INT NOT NULL,
+  "town_hall_id" INT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,
-  CONSTRAINT mairie_id_fk FOREIGN KEY (mairie_id)
-    REFERENCES public.mairie (id_mairie) MATCH SIMPLE
+  CONSTRAINT town_hall_id_fk FOREIGN KEY (town_hall_id)
+    REFERENCES public.town_hall (town_hall_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID
 );
 
-ALTER TABLE IF EXISTS public.personnel_mairie
+ALTER TABLE IF EXISTS public.town_hall_staff
   OWNER to "mamairieV2";
 
-CREATE TABLE IF NOT EXISTS public.article_categorie (
-  "id_article_categorie" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "nom" TEXT NOT NULL,
-  "couleur_hex" TEXT NOT NULL,
+CREATE TABLE IF NOT EXISTS public.article_category (
+  "article_category_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "hex_color" TEXT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ
 );
 
-ALTER TABLE IF EXISTS public.article_categorie
+ALTER TABLE IF EXISTS public.article_category
   OWNER to "mamairieV2";
 
-CREATE TABLE IF NOT EXISTS public.signalement_status (
-  "id_signalement_status" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "nom" TEXT NOT NULL,
+CREATE TABLE IF NOT EXISTS public.reporting_status (
+  "reporting_status_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ
 );
 
-ALTER TABLE IF EXISTS public.signalement_status
+ALTER TABLE IF EXISTS public.reporting_status
   OWNER to "mamairieV2";
 
 
-CREATE TABLE IF NOT EXISTS public.signalement_categorie (
-  "id_signalement_categorie" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "nom" TEXT NOT NULL,
-  "couleur_hex" TEXT NOT NULL,
+CREATE TABLE IF NOT EXISTS public.reporting_category (
+  "reporting_category_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "hex_color" TEXT,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ
 );
 
-ALTER TABLE IF EXISTS public.signalement_categorie
+ALTER TABLE IF EXISTS public.reporting_category
   OWNER to "mamairieV2";
 
 
-CREATE TABLE IF NOT EXISTS public.signalement (
-  "id_signalement" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "titre"  VARCHAR(50) NOT NULL,
+CREATE TABLE IF NOT EXISTS public.reporting (
+  "reporting_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "title"  VARCHAR(50) NOT NULL,
   "email" TEXT NOT NULL,
-  "telephone" CHAR(10),
-  "prenom" TEXT NOT NULL,
-  "nom" TEXT NOT NULL,
+  "phonenumber" CHAR(10),
+  "firstname" TEXT NOT NULL,
+  "lastname" TEXT NOT NULL,
   "description" TEXT NOT NULL,
   "ip" TEXT NOT NULL,
   "image" TEXT,
   "admin_text" TEXT,
   "admin_image" TEXT,
-  "signalement_categorie_id" INT NOT NULL,
-  "signalement_status_id" INT NOT NULL,
-  "mairie_id" INT NOT NULL,
+  "reporting_category_id" INT NOT NULL,
+  "reporting_status_id" INT NOT NULL,
+  "town_hall_id" INT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,
-  CONSTRAINT signalement_categorie_id_fk FOREIGN KEY (signalement_categorie_id)
-    REFERENCES public.signalement_categorie (id_signalement_categorie) MATCH SIMPLE
+  CONSTRAINT reporting_category_id_fk FOREIGN KEY (reporting_category_id)
+    REFERENCES public.reporting_category (reporting_category_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID,
-  CONSTRAINT signalement_status_id_fk FOREIGN KEY (signalement_status_id)
-    REFERENCES public.signalement_status (id_signalement_status) MATCH SIMPLE
+  CONSTRAINT reporting_status_id_fk FOREIGN KEY (reporting_status_id)
+    REFERENCES public.reporting_status (reporting_status_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID,
-  CONSTRAINT mairie_id_fk FOREIGN KEY (mairie_id)
-    REFERENCES public.mairie (id_mairie) MATCH SIMPLE
+  CONSTRAINT town_hall_id_fk FOREIGN KEY (town_hall_id)
+    REFERENCES public.town_hall (town_hall_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID
 );
 
-ALTER TABLE IF EXISTS public.signalement
+ALTER TABLE IF EXISTS public.reporting
   OWNER to "mamairieV2";
 
 COMMIT;

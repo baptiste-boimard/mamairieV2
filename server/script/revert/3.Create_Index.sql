@@ -2,7 +2,7 @@
 
 BEGIN;
 
-DROP index signalement_index;
-DROP index personnel_mairie_index;
+DROP index reporting_index;
+DROP index town_hall_staff_index;
 
 COMMIT;

@@ -2,7 +2,7 @@
 
 BEGIN;
 
-SELECT * FROM pg_indexes WHERE indexname = 'signalement_index';
-SELECT * FROM pg_indexes WHERE indexname = 'personnel_mairie_index';
+SELECT * FROM pg_indexes WHERE indexname = 'reporting_index';
+SELECT * FROM pg_indexes WHERE indexname = 'town_hall_staff_index';
 
 ROLLBACK;

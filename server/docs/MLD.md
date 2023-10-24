@@ -1,19 +1,19 @@
 # MLD 
 
-ARTICLE(id_article, titre, description, resume, image, auteur, admin_id, article_categorie_id)
+ARTICLE(article_id, title, description, summary, image, author, admin_id, article_category_id)
 
-ARTICLE_CATEGORIE(id_article_categorie, nom, couleur_hex)
+ARTICLE_CATEGORY(article_category_id, name, hex_color)
 
 ADMIN(id_admin, pseudo, password, email, mairie_id)
 
-MAIRIE(id_mairie, nom, adresse, telephone, horaire, email, insee)
+TOWN_HALL(town_hall_id, name, address, phonenumber, houry, email, insee)
 
-PERSONNEL_MAIRIE(id_personnel_mairie, prenom, nom, role, photo, id_mairie)
+TOWN_HAL_STAFF(town_hall_staff_id, firstname, lastname, role, photo, town_hall_id)
 
-SERVICE(id_service, nom, telephone, adresse, email, image, mairie_id)
+SERVICE(service_id, name, phonenumber, address, email, image, town_hall_id)
 
-SIGNALEMENT(id_signalement, titre, email, telephone, prenom, nom, description, ip, image, admin_text, admin_image, id_signalement_categorie, id_signalement_status, id_mairie)
+REPORTING(reporting_id, tite, email, phonenumber, firstname, lastname, description, ip, image, admin_text, admin_image, reporting_category_id, reporting_status_id, town_hal_id)
 
-SIGNALEMENT_STATUS(id_signalement_status, nom)
+REPORTING_STATUS(reportin_status_id, name)
 
-SIGNALEMENT_CATEGORIE(id_signalement_catégorie, nom, couleur_hex)
+REPORTING_CATEGORY(reporting_catégory_id, name, hex_color)
