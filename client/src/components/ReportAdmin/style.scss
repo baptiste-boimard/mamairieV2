@@ -1,0 +1,242 @@
+@use 'src/styles/vars';
+
+.reportAdmin {
+    background-color: vars.$backgroundModuleColor;
+    margin-top: 2rem;
+    border: vars.$borderModule;
+    border-radius: 1rem;
+    padding-bottom: 2rem;
+
+    &-checkbox {
+      width: 28%;
+
+      & label {
+        justify-content: center;
+      }
+    }
+    h2 {
+        margin-bottom: 0;
+        padding-right: 1rem;
+    }
+    &-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem auto 0;
+    }
+
+    &-statut {
+        color: white;
+        padding: 0.3rem;
+        border-radius: 0.3rem;
+        &--Résolu {
+            background-color: vars.$statusOkColor;
+        }
+        &--En_cours {
+            background-color: vars.$statusInProgressColor;
+        }
+        &--Non_validé {
+            background-color: vars.$statusRefusedColor;
+        }
+        &--Non_résolu {
+            background-color: vars.$statusRefusedColor;
+        }
+    }
+
+    & .ui.label {
+        color: black!important;
+        width: 20%;
+    }
+    & .ui.label {
+        background-color: vars.$categoryRoute!important;
+    }
+    & .ui.label.Voirie {
+        background-color: vars.$categoryRoute!important;
+    }
+    & .ui.label.Eclairage.public {
+        background-color: vars.$categoryLight!important;
+    }
+    & .ui.label.Voisinage {
+        background-color: vars.$categoryNeighboord!important;
+    }
+    & .ui.label.Ramassage.des.déchets {
+        background-color: vars.$categoryWaste!important;
+    }
+    & .ui.label.Objets.trouvés.ou.perdu {
+        background-color: vars.$categoryObject!important;
+    }
+    & .ui.label.Autre {
+        background-color: vars.$categoryOther!important;
+    }
+
+    &-category {
+        text-align: center;
+    }
+
+    &-header {
+        //background-color: vars.$backgroundBlocColor;
+        margin: 1rem;
+        border-radius: 1rem;
+    }
+
+    &-date {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 1rem;
+        align-items: self-end;
+    }
+    
+    &-newStatut {
+        display: flex;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+        input {
+            display: inline;
+            margin: 0.3rem;
+            justify-content: space-between;
+        }
+
+    &-info {
+        width: 80%;
+        margin: auto;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+    &-image {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    & .ui.input {
+        display: flex;
+        width: 100%;
+        // height: 8rem;
+        margin-bottom: 1rem
+    } 
+
+    &-button {
+        display: flex;
+        width: 90%;
+        margin: auto;
+    }
+    & .ui.button {
+        width: 50%;
+        transition: all 0.5s ease-in-out;
+
+      &:hover {
+        box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+        // transform: scale(1.01);
+      }
+    }
+}
+
+button.ui.button.reportAdmin-submit {
+    background-color: #7fd30042;
+}
+
+button.ui.button.reportAdmin-abort {
+    background-color: #d3258d41;
+}
+[type="radio"] {
+   clip: rect(0 0 0 0); 
+   position: absolute; 
+}
+
+input[type="radio"] + label {
+  padding: 0.75rem 0.2rem;
+  display: flex;
+  margin: 1.5rem 0 0.5rem;
+  line-height: 1.5;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  color: rgb(255, 255, 255);
+  background-color: #6c757d;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+input[type="radio"].inProgress:hover + label {
+  background-color: vars.$statusInProgressColor;
+  border-color: vars.$statusInProgressColor;
+  box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+input[type="radio"].inProgress:checked + label {
+  background-color: vars.$statusInProgressColor;
+  border-color: vars.$statusInProgressColor;
+  cursor: pointer;
+}
+
+input[type="radio"].done:hover + label {
+  background-color: vars.$statusOkColor;
+  border-color: vars.$statusOkColor;
+  box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+input[type="radio"].done:checked + label {
+  background-color: vars.$statusOkColor;
+  border-color: vars.$statusOkColor;
+}
+
+input[type="radio"].abort:hover + label {
+  background-color: vars.$statusRefusedColor;
+  border-color: vars.$statusRefusedColor;
+  box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+input[type="radio"].abort:checked + label {
+  background-color: vars.$statusRefusedColor;
+  border-color: vars.$statusRefusedColor;
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+    .reportAdmin {
+        // border: 0.1rem solid black;
+        // background-color: vars.$fontColor; 
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        
+        &-checkbox {
+          width: 30%;
+
+          & label {
+            justify-content: center;
+          }
+        }
+
+        &-newStatut {
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        & .ui.button {
+            width: 30%;
+            margin: auto;
+        }
+
+        &-date {
+          align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+
+            & .ui.label {
+                margin-top: 1rem;
+          
+              }
+        }
+    }
+
+    input[type="radio"] + label {
+        padding: 1rem 1rem;
+        font-size: 1.25rem;
+    }
+    
+}

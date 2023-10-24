@@ -1,0 +1,113 @@
+{
+  "name": "projet-14-o-mairie-front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@semantic-ui-react/css-patch": "^1.0.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/user-event": "^13.5.0",
+    "@zarconontol/enzyme-adapter-react-18": "^0.7.3",
+    "axios": "^0.27.2",
+    "babel-jest": "^28.1.0",
+    "cheerio": "^1.0.0-rc.10",
+    "enzyme": "^3.11.0",
+    "jest": "^28.1.0",
+    "moment": "^2.29.3",
+    "prop-types": "^15.8.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-moment": "^1.1.2",
+    "react-redux": "^8.0.1",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "redux": "^4.2.0",
+    "sass": "^1.51.0",
+    "sass-loader": "^12.6.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.1.4",
+    "semantic-ui-sass": "^2.4.2",
+    "web-vitals": "^2.1.4"
+  },
+  "jest": {
+    "modulePaths": [
+      "./"
+    ],
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/tests"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/.setup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|scss|sass)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "scripts": {
+    "start": "semantic-ui-css-patch && react-scripts start",
+    "postinstall": "semantic-ui-css-patch",
+    "build": "react-scripts build",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "airbnb"
+    ],
+    "rules": {
+      "jsx-a11y/label-has-associated-control": "off",
+      "jsx-a11y/no-static-element-interactions": "off",
+      "jsx-a11y/href-no-hash": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+      "jsx-a11y/mouse-events-have-key-events": "off",
+      "jsx-a11y/click-events-have-key-events": "off",
+      "jsx-a11y/no-noninteractive-element-interactions": "off",
+      "react/jsx-filename-extension": "off",
+      "react/forbid-prop-types": "off",
+      "react/no-access-state-in-setstate": "warn",
+      "react/jsx-one-expression-per-line": "off",
+      "react/destructuring-assignment": "warn",
+      "react/no-unescaped-entities": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/state-in-constructor": "off",
+      "func-names": "off",
+      "object-shorthand": "off",
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/function-component-definition": "off",
+      "camelcase": "off",
+      "no-unused-vars": [
+        "warn",
+        {
+          "varsIgnorePattern": "VARIABLE_NAME"
+        }
+      ]
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^13.2.0",
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0"
+  }
+}

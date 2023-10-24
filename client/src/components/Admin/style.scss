@@ -1,0 +1,131 @@
+@use 'sass:color';
+@use 'src/styles/vars';
+
+.admin {
+    margin: 0 1.5rem 0;
+
+    & h2 {
+        text-align: center;
+        margin: 1rem 0 2.5rem;
+    }
+
+    &-content {
+        margin-bottom: 2rem;
+
+        .create {
+          background-color: vars.$createColor;
+          border: 0.1rem solid color.scale(vars.$createColor, $lightness: -20%);
+
+            &:hover {
+              background-color: color.scale(vars.$createColor, $lightness: -10%);
+              border-color: color.scale(vars.$createColor, $lightness: -30%);
+            }
+        }
+        .editCouncil {
+          background-color: vars.$edit;
+          border: 0.1rem solid color.scale(vars.$edit, $lightness: -20%);
+
+            &:hover {
+              background-color: color.scale(vars.$edit, $lightness: -10%);
+              border-color: color.scale(vars.$edit, $lightness: -30%);
+            }
+        }
+        .process {
+            background-color: vars.$process;
+            border: 0.1rem solid color.scale(vars.$process, $lightness: -20%);
+
+            &:hover {
+                background-color: color.scale(vars.$process, $lightness: -10%);
+                border-color: color.scale(vars.$process, $lightness: -30%);
+            }
+        }
+
+        .ui.button {
+            margin: 0.2rem;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+              box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+            }
+
+        }
+    }
+
+    &-button .ui.button {
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    &-button {
+        text-align: center;
+        background-color: vars.$backgroundModuleColor;
+        padding: 1rem;
+        border: vars.$borderModule;
+        border-radius: 1rem;
+        transition: all .2s ease-in-out;
+
+    
+      &:hover {
+        box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+        transform: scale(1.005);
+      }
+      
+    }
+
+    &-form {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem;
+    }
+}
+
+.ui.message.inprogress-adminMessage {
+  text-align: justify;
+  margin: 0.2rem;
+  padding: 0;
+  width: 100%;
+  border: solid 0.1rem grey;
+  & .icon {
+    transform: scale(0.75);
+  }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+    .admin {
+        &-container {
+            // display: grid;
+            // flex-wrap: wrap;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            justify-content: space-evenly;
+        }
+        &-content {
+            width: 45%;
+            
+          
+          & .admin-button {
+            min-height: 10rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            &.waste, &.landfill {
+              min-height: 16rem;
+            }
+          }
+        }
+    }
+    .ui.message.inprogress-adminMessage {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .ui.message.inprogress-adminMessage {
+      margin: 0.2rem;
+      width: 100%;
+    }
+}

@@ -15,8 +15,8 @@ const dataMapperReporting = {
    */
   async getAllReport(townHallId) {
     const query = {
-      text: `SELECT * FROM reporting
-            WHERE town_hall_id = $1 ORDER BY reporting_statut = $2, reporting_statut = $3, reporting_statut = $4, reporting_statut = $5 DESC;`,
+      text: `SELECT * FROM signalement
+            WHERE mairie_id = $1 ORDER BY reporting_statut = $2, reporting_statut = $3, reporting_statut = $4, reporting_statut = $5 DESC;`,
       values: [townHallId, `Non Résolu`, `Résolu`, `En cours`, `Non validé`],
     };
     const data = await client.query(query);
@@ -31,10 +31,23 @@ const dataMapperReporting = {
    */
   async getAllReportVisitor(townHallId) {
     const query = {
-      text: `SELECT * FROM reporting WHERE town_hall_id = $1
-      AND NOT reporting_statut LIKE '%validé' ORDER BY reporting_statut = $2, reporting_statut = $3, reporting_statut = $4`,
+      text: `SELECT * FROM signalement as s
+              JOIN 
+                (SELECT signalement_categorie.id_signalement_categorie, signalement_categorie.nom as signalement_categorie_nom
+                FROM signalement_categorie) as  cat
+                ON s.signalement_categorie_id = cat.id_signalement_categorie
+              JOIN
+                (SELECT signalement_status.id_signalement_status, signalement_status.nom as signalement_status_nom
+                FROM signalement_status) as stat
+                ON s.signalement_status_id = stat.id_signalement_status
+              WHERE s.mairie_id = $1
+              AND NOT signalement_status_nom LIKE '%validé'
+              ORDER BY signalement_status_nom = $2,
+                      signalement_status_nom = $3,
+                      signalement_status_nom = $4`,
       values: [townHallId, `Non résolu`, `Résolu`, `En cours`],
     };
+
     const data = await client.query(query);
     return data.rows;
   },

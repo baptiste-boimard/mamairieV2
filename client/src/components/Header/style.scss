@@ -1,0 +1,33 @@
+@use 'src/styles/vars';
+
+.header {
+  // background-color: vars.$backgroundDesktopColor;
+  background-color: transparent;
+
+    // &-head {
+    //   padding: 0.75rem 0;
+    //   display: flex;
+    //   flex-direction: row;
+    //   align-items: center;
+    //   justify-content: space-between;
+      
+    //   & img {
+    //     align-items: center;
+    //     width: 7%;
+    //   }
+
+    //   & h2 {
+    //     margin: 0;
+    //     text-align: center;
+    //     color: black;
+    //     font-size: 0.75rem;
+    //     width: 40%;
+    //   }
+    // }  
+
+    &-photo {
+      align-items: center;
+      width: 100%;
+    }
+
+}

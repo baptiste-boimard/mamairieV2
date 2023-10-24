@@ -1,0 +1,57 @@
+@use 'src/styles/vars';
+
+.footer{
+  color: vars.$fontColor;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  background-color: vars.$seconderyColor;
+
+    &-content {
+      padding: 1rem;
+    }
+
+    &-infos {
+      padding-top: 0.5rem;
+
+    }
+    &-hourly {
+      border-top: solid 0.1rem;
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+    }
+    &-followUs {
+      padding-top: 0.5rem;
+      border-top: solid 0.1rem;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+}
+
+.copyright {
+font-size: 1rem;
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+  .footer {
+
+    &-content {
+      display: flex;
+      justify-content: space-evenly;
+      border: none;
+      align-items: baseline;
+      padding: 0;
+    }
+
+    &-hourly {
+      border: none;
+    }
+
+    &-rightContent {
+      flex-direction: column;
+      
+    }
+
+  }
+}

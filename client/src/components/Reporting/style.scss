@@ -1,0 +1,173 @@
+@use 'sass:color';
+@use 'src/styles/vars';
+
+
+.reporting {
+  margin-bottom: 0rem;
+  text-align: center;
+
+  background-color: vars.$backgroundModuleColor;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  border: vars.$borderModule;
+
+  & .obligateFields {
+    font-size: 0.75rem ;  }
+
+  & .ui.basic.label {
+    color: #af0202;
+    border-color: #af0202;
+    margin: -0.5rem 0 0.5rem;
+  }
+
+  & .reporting-rule {
+    font-size: 0.75rem;
+    margin: 0 ;
+  }
+
+  & h1 {
+    text-align: center;
+
+  }
+
+  & .filter-section {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    & .ui.fluid.dropdown.categories {
+      width: 86%;
+    }
+  }
+
+  & .reporting-form-textarea {
+    width: 86%;
+  }
+
+  & .ui.button {
+
+    transition: all .2s ease-in-out;
+    
+    &:hover {
+      box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+    }
+
+    &.form-submit {
+      background-color: vars.$confirmButton;
+      margin-right: 3rem;
+    }
+    &.form-back {
+      background-color: vars.$cancelButton;
+    }
+  }
+
+  & .ui.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &>p {
+      margin: -1rem 0 0.5rem;
+    }
+  
+    & .ui.input {
+      margin-bottom: 1rem;
+      
+      &.error {
+        border: 2px solid #c33e3e;
+        color: #c33e3e ;
+      }
+      
+      &.field-reporting_title {
+        width: 86%;
+      }
+    }
+  
+    & .reporting-form-checkbox {
+      width: 85%;
+      margin: 1.5rem 0 0.5rem;
+      display: flex ;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+  
+      & .accordion.ui {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  
+        & .retail-container {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          
+          & p {
+            margin: 0;
+          }
+        }
+        & .content.active {
+          width: 100%;
+        }
+        & .ui.message {
+          text-align: center;
+          width: 100%;
+          margin-bottom: 2rem;
+          padding: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.ui.dropdown {
+  font-size: 1rem;
+
+  &>.text>.icon {
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  }
+
+  & .menu>.item>.icon {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+  }
+}
+
+.ui.form>p {
+  margin: -1rem 0 0.5rem;
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+  .reporting {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .reporting-form .filter-section .ui.fluid.dropdown.categories {
+    width: 65%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .ui.form .field {
+    width: 65%;
+    display:flex;
+    justify-content: center ;
+  }
+
+  .reporting .ui.form .ui.input.field-reporting_title {
+  width: 65%;  
+  }
+
+}

@@ -44,7 +44,6 @@ const adminController = {
     if (!existingUser) {
       const userSignup = await dataMapperAdmin.userSignup(
         req.body.pseudo,
-        req.body.insee,
         hashPassword,
         req.body.email,
         townHallId,
@@ -68,21 +67,25 @@ const adminController = {
    */
   async login(req, res, next) {
     const existingUser = await dataMapperAdmin.getOneAdmin(req.body.email);
+
     if (!existingUser) {
-      const err = new Error(`Impossible de récupérer Administrateur en base.`);
+      const err = new Error(`Impossible de récupérer l'administrateur en base.`);
       next(err);
     }
     const match = await bcrypt.compare(
       req.body.password,
       existingUser.password,
     );
+
     if (match) {
       const data = await dataMapperAdmin.userLogin(
         req.body.email,
         existingUser.password,
       );
-      const user = { pseudo: data.pseudo, town_hall_id: data.town_hall_id };
+      console.log(data);
+      const user = { pseudo: data.pseudo, town_hall_id: data.mairie_id };
       const townHallId = user.town_hall_id;
+      console.log(townHallId);
       const accessToken = jwt.sign(user, secretKey);
       res.json({ accessToken, townHallId });
       // res.json({ user, townHallId });

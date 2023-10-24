@@ -1,8 +1,8 @@
 %syntax-version=1.0.0
-%project=mamairie
+%project=mamairieV2_sqitch
 
-1.DDL 2022-05-04T13:03:23Z Etudiant O'clock <student@teleporter> # basic database structure
-2.DML 2022-05-04T14:32:08Z Etudiant O'clock <student@teleporter> # importing data into the data base
-3.DML2 2022-05-17T12:10:18Z Nicolas Cauet <nicolascauet@nicojess-MS-7693> # insert data
-4.index 2022-05-25T09:55:49Z Nicolas Cauet <nicolascauet@nicojess-MS-7693> # create index on table reporting, town_hall_staff
-mamairie 2023-05-27T10:40:35Z baptiste,,, <baptiste@baptiste-VirtualBox> # Create DB
+1.Create_DB 2023-10-23T14:26:33Z baptiste,,, <baptiste@baptiste-VirtualBox> # Create DB
+2.Create_Tables 2023-10-23T14:29:57Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout des tables
+3.Create_Index 2023-10-23T16:17:49Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout d'index pour les signalements et le personnel
+4.Add_mairie_data_in_DB 2023-10-23T16:40:48Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout de données pour la table mairie
+5.Add_data_in_DB 2023-10-24T07:34:43Z baptiste,,, <baptiste@baptiste-VirtualBox> # Ajout de données pour la table signalement et personnel_mairie

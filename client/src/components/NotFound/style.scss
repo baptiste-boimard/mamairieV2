@@ -1,0 +1,29 @@
+.notfound {
+  margin: 2rem 0 2rem;
+  text-align: center;
+  align-items: center;
+
+  &-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  } 
+
+  &-button {
+    width: 40%;
+  }
+}
+
+// & .message-container {
+//   display: flex;
+//   justify-content: center;
+//   & .ui.negative.message {
+//     text-align: center;
+//     width: 85%;
+//   }
+//   & .ui.positive.message {
+//     text-align: center;
+//     width: 85%;
+//   }
+// }

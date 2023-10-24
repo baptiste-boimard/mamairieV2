@@ -1,1 +1,0 @@
-sqitch add 4.Add_mairie_data_in_DB -n "Ajout de données pour la table mairie"

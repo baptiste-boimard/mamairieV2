@@ -1,0 +1,146 @@
+@use 'sass:color';
+@use 'src/styles/vars';
+
+.card-container {
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  background-color: vars.$backgroundModuleColor;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  border: vars.$borderModule;
+
+  & .editingIcon {
+    position: absolute;
+    right: 0.05rem;
+    bottom: 0.05rem;
+    cursor: pointer;
+  }
+
+  & .deleteIcon {
+    color: red;
+    position: absolute;
+    right: 0.05rem;
+    top: 0.05rem;
+    cursor: pointer;
+  }
+
+  & h2 {
+    text-align: center;
+    margin: 1rem 0 2.5rem;
+    width: 100%;
+  }
+
+  & .ui.card {
+    width: 25%;
+    margin: 0 1rem 1rem;
+    transition: all .2s ease-in-out;
+
+
+    &:hover {
+      box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+      transform: scale(1.005);
+    }
+
+    & .content {
+      position: relative;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &.content-circle {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        color: rgba(0,0,0,.6);
+        & h2 {
+          margin: 0;
+          text-align: center;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    &>.content>.card-header {
+      text-align: center;
+      font-size: 0.8rem;
+      margin: 0.33rem 0;
+      padding: 0;
+    }
+
+    &>.content>.meta {
+      text-align: center;
+      font-size: 1rem;
+      margin: 0.33rem 0;
+      padding: 0;
+    }
+  }
+}
+
+.ui.modal.modalEditingCouncilMember {
+  width: 70%;
+  & .header {
+    text-align: center;
+  }
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  & .modal-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .ui.input {
+      width: 80%;
+      margin: 0.33rem;
+    }
+  }
+}
+
+.ui.modal>.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  
+  & .ui.button {
+    padding: 1rem;
+    transition: all .2s ease-in-out;
+    
+    &:hover {
+      box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+    }
+
+    &.button-cancel {
+      background-color: vars.$cancelButton;
+    }
+
+    &.button-confirm {
+      background-color: vars.$confirmButton;
+    }
+
+  }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+ .card-container {
+   width: 80%;
+   margin-left: auto;
+   margin-right: auto;
+ }
+}

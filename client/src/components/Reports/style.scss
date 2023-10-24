@@ -1,0 +1,128 @@
+@use 'sass:color';
+@use 'src/styles/vars';
+
+.reports-content {
+  margin-top: 2rem;
+}
+
+.reporting-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ui.button.reporting-button {
+  background-color: vars.$warningButtonColor;
+  border: 2px solid color.scale(vars.$warningButtonColor, $lightness: -20%);
+  color: vars.$textButton;
+  font-size: 2rem ;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  width: 85%;
+  transition: all .2s ease-in-out;
+
+
+  &:hover {
+    background-color: color.scale(vars.$warningButtonColor, $lightness: -10%);
+    border: 2px solid color.scale(vars.$warningButtonColor, $lightness: -30%);
+    color: color.scale(vars.$textButton, $lightness: -60%);
+    box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+  }
+
+  & .icon {
+    transform: scale(1);
+  }
+}
+
+.ui.styled.accordion {
+  box-shadow: none;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    box-shadow: 2px 2px 9px 0px rgba(0,0,0,0.3);
+    transform: scale(1.005);
+  }
+
+  & .title {
+    border: none;
+  }
+    
+  & .ui.label {
+  color: black!important;
+  width: 20%;
+  }
+  & .ui.label {
+    background-color: vars.$categoryRoute!important;
+  }
+  & .ui.label.Voirie {
+    background-color: vars.$categoryRoute!important;
+  }
+  & .ui.label.Eclairage.public {
+    background-color: vars.$categoryLight!important;
+  }
+  & .ui.label.Voisinage {
+    background-color: vars.$categoryNeighboord!important;
+  }
+  & .ui.label.Ramassage.des.déchets {
+    background-color: vars.$categoryWaste!important;
+  }
+  & .ui.label.Objets.trouvés.ou.perdu {
+    background-color: vars.$categoryObject!important;
+  }
+  & .ui.label.Autre {
+    background-color: vars.$categoryOther!important;
+  }
+  & .ui.label.Non.validé {
+    background-color: vars.$statusRefusedColor!important;
+  }
+  & .ui.label.En.cours {
+    background-color: vars.$statusInProgressColor!important;
+  }
+  & .ui.label.Terminé {
+    background-color: vars.$statusOkColor!important;
+  }
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 1.5rem 0;
+
+  & .ui.fluid.dropdown {
+    width: 22%;
+
+    &.categories {
+    width: 54%;
+    }
+  }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+  .reports {
+    &-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  .filter-section {
+    justify-content: space-between;
+    width: 80%;
+    margin: 1.5rem auto;
+
+    & .ui.fluid.dropdown {
+      width: 20%;
+  
+      &.categories {
+      width: 40%;
+      }
+    }
+  }
+  .ui.button.reporting-button {
+    width: 30%;
+  }
+}

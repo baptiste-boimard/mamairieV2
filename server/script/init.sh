@@ -8,7 +8,7 @@ createuser mamairieV2 --login --password
 createdb mamairieV2 --owner mamairieV2
 
 # 3. Initialiser Sqitch
-sqitch init mamairieV2 --engine pg # on indique qu'on travaille avec postgres (pg)
+sqitch init mamairieV2_sqitch --engine pg # on indique qu'on travaille avec postgres (pg)
 
 # 4. Je crèe une version 1 pour ma BDD
-sqitch add mamairieV2 -n "Create DB"
+sqitch add 1.Create_DB -n "Create DB"
