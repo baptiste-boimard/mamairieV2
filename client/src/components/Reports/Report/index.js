@@ -30,8 +30,6 @@ function Report({
   signalement_status_nom,
   admin_text,
 }) {
-  // eslint-disable-next-line max-len
-  // console.log(id_signalement, titre, created_at, signalement_categorie_nom, description, signalement_status_nom, admin_text);
   const dispatch = useDispatch();
 
   const { activeIndex } = useSelector((state) => state.reports);

@@ -46,7 +46,6 @@ const adminApi = (store) => (next) => (action) => {
       break;
     case DELETE_SELECTED_REPORT: {
       instance.delete(`/admin/reporting/${townHallId}/${action.id}`)
-
         .then((response) => {
           /** success of get request
            * @getAdminReports get new reports list to state value

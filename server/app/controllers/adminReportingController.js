@@ -15,7 +15,6 @@ const adminReportingController = {
    * @returns Return all reports Administrator
    */
   async allReporting(req, res, next) {
-    console.log(req.params.town_hall_id);
     if (parseInt(req.params.town_hall_id, 10) !== req.admin.town_hall_id) {
       const err = new Error(
         `Vous n'êtes pas autorisé à accéder à cette page.`,
