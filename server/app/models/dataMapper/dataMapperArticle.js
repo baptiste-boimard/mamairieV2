@@ -64,16 +64,15 @@ const dataMapperArticle = {
   async modifyArticle(object) {
     const query = {
       text: `UPDATE article
-      SET title = $1, description = $2, summarize = $3, image = $4, author = $5, article_categorie = $6, article_color = $7
+      SET title = $1, description = $2, summary = $3, image = $4, author = $5, article_category_id = $6, article_color = $7
       WHERE article_id = $8; `,
       values: [
         object.title,
         object.description,
-        object.summarize,
+        object.summary,
         object.image,
         object.author,
-        object.article_categorie,
-        object.article_color,
+        object.article_category_id,
         object.article_id,
       ],
     };
@@ -90,23 +89,20 @@ const dataMapperArticle = {
   async postArticle(object) {
     const query = {
       text: `INSERT INTO article
-            (title, description, summarize, image, author, article_categorie, article_color, town_hall_id)
+            (title, description, summary, image, author, article_category, admin_id, town_hall_id)
       VALUES ($1, $2, $3, $4,  $5,  $6, $7, $8)`,
       values: [
         object.title,
         object.description,
-        object.summarize,
+        object.summary,
         object.image,
         object.author,
         object.article_categorie,
-        object.article_color,
-        object.article_id,
+        object.admin_id,
+        object.town_hall_id,
       ],
     };
     const data = await client.query(query);
-    if (data.Error === `une valeur NULL viole la contrainte NOT NULL de la colonne « description » dans la relation « article »`) {
-      throw new Error(`Le champs description est requis !`);
-    }
     return data;
   },
 
@@ -120,11 +116,28 @@ const dataMapperArticle = {
   async getAllArticle(townHallId) {
     const query = {
       text: `SELECT * FROM article
-                    WHERE town_hall_id = $1;`,
+            WHERE town_hall_id = $1;`,
       values: [townHallId],
     };
     const data = await client.query(query);
     return data.rows;
+  },
+
+  /**
+   * Method to get article_category_id
+   * @memberof getOneArticleCategory
+   * @method Get
+   * @param  {string} articleCategoryName
+   * @returns {number}
+   */
+  async getOneArticleCategory(articleCategoryName) {
+    const query = {
+      text: `SELECT article_category_id FROM article_category
+            WHERE name = $1`,
+      values: [articleCategoryName],
+    };
+    const data = await client.query(query);
+    return data.rows[0];
   },
 };
 

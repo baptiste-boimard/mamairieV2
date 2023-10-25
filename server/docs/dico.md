@@ -28,7 +28,7 @@
 | admin_text | TEXT | | Réponse de l'admin |
 | admin_image | TEXT | | address de stockage de l'image ajoutée par l'admin |
 | reporting_category_id | TEXT | REFERENCES signalement_categorie(id_signalement_categorie) | Idendifiant de la catégorie du signalement |
-| reporting_status_id | TEXT | REFERENCES signalement_status(id_signalement_status) | Idendifiant du status du signalement |
+| reporting_status_id | TEXT | REFERENCES signalement_status(id_signalement_status) SET DEFAULT 1 | Idendifiant du status du signalement |
 | town_hall_id | INT | REFERENCES town_hall(id_town_hall) | Idendifiant de la town_hall |
 | created_at | TIMESTAMPTZ | DEFAULT NOW() | Création date |
 | updated_at | TIMESTAMPTZ | | Mise à jour date |
@@ -45,7 +45,9 @@
 | summary | TEXT | | Résumé de l'article |
 | image | TEXT | | address de l'image de l'article |
 | author | TEXT | NOT NULL | Auteur de l'article |
-| admin_id | INT | | REFERENCES admin(id_admin) | Idendifiant de la town_hall |
+| admin_id | INT | NOT NULL | REFERENCES admin(id_admin) | Idendifiant de l'admin |
+| article_category_id | INT | NOT NULL | REFERENCES article_category(article_category_id) | Idendifiant de la catégorie de l'article |
+| town_hall_id | INT | NOT NULL | REFERENCES town_hall(town_hall_id) | Idendifiant de la town_hall |
 | created_at | TIMESTAMPTZ | DEFAULT NOW() | Création date |
 | updated_at | TIMESTAMPTZ | | Mise à jour date |
 

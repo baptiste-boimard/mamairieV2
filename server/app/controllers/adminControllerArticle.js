@@ -80,14 +80,24 @@ const adminControllerArticle = {
       err.status = 401;
       next(err);
     }
+
+    if (
+      req.body.title === `` || req.body.description === `` || req.body.author === ``
+    ) {
+      const err = new Error(`La saisie des champs Titre, Description et Auteur est obligatoire`);
+      err.status = 406;
+      next(err);
+    }
+
+    const articleCategory = await dataMapperArticle.getOneArticleCategory(req.body.article_categorie);
+
     const values = {
       title: req.body.title,
       description: req.body.description,
-      summarize: req.body.summarize,
+      summary: req.body.summary,
       image: req.body.image,
       author: req.body.author,
-      article_categorie: req.body.article_categorie,
-      article_color: req.body.article_color,
+      article_category_id: articleCategory,
       article_id: req.params.article_id,
     };
     const report = await dataMapperArticle.modifyArticle(values);
@@ -112,15 +122,18 @@ const adminControllerArticle = {
       err.status = 401;
       next(err);
     }
+
+    const articleCategory = await dataMapperArticle.getOneArticleCategory(req.body.article_category);
+
     const values = {
       title: req.body.title,
       description: req.body.description,
-      summarize: req.body.summarize,
+      summary: req.body.summary,
       image: req.body.image,
       author: req.body.author,
-      article_categorie: req.body.article_categorie,
-      article_color: req.body.article_color,
-      article_id: req.params.town_hall_id,
+      article_category: articleCategory,
+      admin_id: req.admin.admin_id,
+      town_hall_id: req.admin.town_hall_id,
     };
     const report = await dataMapperArticle.postArticle(values);
     if (report.rowCount) {

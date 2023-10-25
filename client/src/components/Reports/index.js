@@ -162,7 +162,7 @@ function Reports() {
       )}
       {!isReporting && !loading && (
         <section className="reports-container">
-          {filteredReports.map((report) => <Report key={report.id_signalement} {...report} />)}
+          {filteredReports.map((report) => <Report key={report.reporting_id} {...report} />)}
         </section>
       )}
     </div>

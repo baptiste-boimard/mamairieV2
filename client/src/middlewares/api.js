@@ -44,11 +44,11 @@ const api = (store) => (next) => (action) => {
     case SUBMIT_REPORTING:
       instance.post(`/reporting/${townHallId}`, {
         reporting_category: action.reporting_category,
-        title: action.reporting_title,
-        user_text: action.reporting_description,
+        title: action.title,
+        description: action.reporting_description,
         email: action.reporting_email,
-        first_name: action.reporting_firstName,
-        last_name: action.reporting_lastName,
+        firstname: action.reporting_firstName,
+        lastname: action.reporting_lastName,
         phonenumber: action.reporting_phone,
         town_hall_id: townHallId,
       })

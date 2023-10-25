@@ -22,12 +22,12 @@ import {
 import './style.scss';
 
 function Report({
-  id_signalement,
-  titre,
+  reporting_id,
+  title,
   created_at,
-  signalement_categorie_nom,
+  reporting_category,
   description,
-  signalement_status_nom,
+  reporting_status,
   admin_text,
 }) {
   const dispatch = useDispatch();
@@ -60,12 +60,12 @@ function Report({
    * @getAdminReports get request to API to get new reports list
    */
   const confirmDeleteReport = () => {
-    dispatch(deleteSelectedReport(id_signalement));
+    dispatch(deleteSelectedReport(reporting_id));
     setConfirm(false);
   };
 
   // const confirmDeleteReport = () => setTimeout(() => {
-  //   dispatch(deleteSelectedReport(id_signalement));
+  //   dispatch(deleteSelectedReport(reporting_id));
   //   setConfirm(false);
   //   dispatch(getAdminReports());
   // }, 2000);
@@ -78,20 +78,20 @@ function Report({
         {/* Accordion modele */}
         <>
           <Accordion.Title
-            active={activeIndex === id_signalement}
-            index={id_signalement}
+            active={activeIndex === reporting_id}
+            index={reporting_id}
             onClick={handleClickAccordion}
             className="report-title"
           >
             <div className="report-content">
               <div className="report-header">
-                <Label className={signalement_categorie_nom} size="small">
-                  {signalement_categorie_nom}
+                <Label className={reporting_category} size="small">
+                  {reporting_category}
                 </Label>
                 <h3>Créé le <Moment format="DD/MM/YYYY">{created_at}</Moment></h3>
               </div>
-              <span className={`report-statut report-statut--${signalement_status_nom.replace(' ', '_')}`}>{signalement_status_nom}</span>
-              <h2 className="report-title">{titre}</h2>
+              <span className={`report-statut report-statut--${reporting_status.replace(' ', '_')}`}>{reporting_status}</span>
+              <h2 className="report-title">{title}</h2>
               <div className="report-moreInfo">
                 <Icon name="caret square down outline" />
                 En savoir plus
@@ -99,7 +99,7 @@ function Report({
             </div>
           </Accordion.Title>
 
-          <Accordion.Content active={activeIndex === id_signalement}>
+          <Accordion.Content active={activeIndex === reporting_id}>
             <Message color="grey">
               <Message.Header>Message du signalant :</Message.Header>
               <p>
@@ -120,7 +120,7 @@ function Report({
             )}
             {logged && window.location.pathname.includes('admin') && (
               <div className="report-button">
-                <Link to={`/admin/reports/1/${id_signalement}`}>
+                <Link to={`/admin/reports/1/${reporting_id}`}>
                   <Button
                     className="report-button--inProgress"
                     onClick={() => { dispatch(eraseValueActiveIndex()); }}
@@ -147,12 +147,12 @@ function Report({
 }
 
 Report.propTypes = {
-  id_signalement: PropTypes.number.isRequired,
-  titre: PropTypes.string.isRequired,
+  reporting_id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
   created_at: PropTypes.string.isRequired,
-  signalement_categorie_nom: PropTypes.string.isRequired,
+  reporting_category: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  signalement_status_nom: PropTypes.string.isRequired,
+  reporting_status: PropTypes.string.isRequired,
   admin_text: PropTypes.string,
 };
 

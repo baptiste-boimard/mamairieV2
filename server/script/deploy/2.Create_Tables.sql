@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS public.admin (
   "pseudo" VARCHAR(20) UNIQUE,
   "password" TEXT NOT NULL,
   "email" TEXT NOT NULL UNIQUE,
-  "town_hall_id" INT NOT NULL, 
+  "town_hall_id" INT, 
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,
   CONSTRAINT town_hall_id_fk FOREIGN KEY (town_hall_id)
@@ -36,6 +36,17 @@ CREATE TABLE IF NOT EXISTS public.admin (
 ALTER TABLE IF EXISTS public.admin
   OWNER to "mamairieV2";
 
+CREATE TABLE IF NOT EXISTS public.article_category (
+  "article_category_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "hex_color" TEXT NOT NULL,
+  "created_at" TIMESTAMPTZ DEFAULT NOW(),
+  "updated_at" TIMESTAMPTZ
+);
+
+ALTER TABLE IF EXISTS public.article_category
+  OWNER to "mamairieV2";
+
 CREATE TABLE IF NOT EXISTS public.article (
   "article_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   "title"  VARCHAR(40) NOT NULL,
@@ -44,10 +55,22 @@ CREATE TABLE IF NOT EXISTS public.article (
   "image" TEXT,
   "author" TEXT NOT NULL,
   "admin_id" INT NOT NULL,
+  "article_category_id" INT NOT NULL,
+  "town_hall_id" INT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,
   CONSTRAINT admin_id_fk FOREIGN KEY (admin_id)
     REFERENCES public.admin (admin_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    NOT VALID,
+  CONSTRAINT article_category_id_fk FOREIGN KEY (article_category_id)
+    REFERENCES public.article_category (article_category_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    NOT VALID,
+  CONSTRAINT town_hall_id_fk FOREIGN KEY (town_hall_id)
+    REFERENCES public.town_hall (town_hall_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID
@@ -95,28 +118,6 @@ CREATE TABLE IF NOT EXISTS public.town_hall_staff (
 ALTER TABLE IF EXISTS public.town_hall_staff
   OWNER to "mamairieV2";
 
-CREATE TABLE IF NOT EXISTS public.article_category (
-  "article_category_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "name" TEXT NOT NULL,
-  "hex_color" TEXT NOT NULL,
-  "created_at" TIMESTAMPTZ DEFAULT NOW(),
-  "updated_at" TIMESTAMPTZ
-);
-
-ALTER TABLE IF EXISTS public.article_category
-  OWNER to "mamairieV2";
-
-CREATE TABLE IF NOT EXISTS public.reporting_status (
-  "reporting_status_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "name" TEXT NOT NULL,
-  "created_at" TIMESTAMPTZ DEFAULT NOW(),
-  "updated_at" TIMESTAMPTZ
-);
-
-ALTER TABLE IF EXISTS public.reporting_status
-  OWNER to "mamairieV2";
-
-
 CREATE TABLE IF NOT EXISTS public.reporting_category (
   "reporting_category_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   "name" TEXT NOT NULL,
@@ -128,6 +129,15 @@ CREATE TABLE IF NOT EXISTS public.reporting_category (
 ALTER TABLE IF EXISTS public.reporting_category
   OWNER to "mamairieV2";
 
+CREATE TABLE IF NOT EXISTS public.reporting_status (
+  "reporting_status_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "created_at" TIMESTAMPTZ DEFAULT NOW(),
+  "updated_at" TIMESTAMPTZ
+);
+
+ALTER TABLE IF EXISTS public.reporting_status
+  OWNER to "mamairieV2";
 
 CREATE TABLE IF NOT EXISTS public.reporting (
   "reporting_id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -142,7 +152,7 @@ CREATE TABLE IF NOT EXISTS public.reporting (
   "admin_text" TEXT,
   "admin_image" TEXT,
   "reporting_category_id" INT NOT NULL,
-  "reporting_status_id" INT NOT NULL,
+  "reporting_status_id" INT NOT NULL SET DEFAULT 1,
   "town_hall_id" INT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,

@@ -127,11 +127,13 @@ const adminReportingController = {
       err.status = 401;
       next(err);
     }
+    const getStatus = await dataMapperReporting.getOneReportingStatus(req.body.reporting_statut);
     const getReport = await dataMapperReporting.getOneReport(req.params.reporting_id);
     const values = {
       admin_text: req.body.admin_text,
-      reporting_statut: req.body.reporting_statut,
+      reporting_statut: getStatus.reporting_status_id,
       reporting_id: req.params.reporting_id,
+
     };
     const report = await dataMapperReporting.modifyReport(values);
     if (report.rowCount) {
@@ -152,25 +154,27 @@ const adminReportingController = {
    * @returns void
    */
   async postReporting(req, res, next) {
+    const reportingCategory = await dataMapperReporting.getOneReportingCategory(req.body.reporting_category);
+
     const values = {
       title: req.body.title,
       email: req.body.email,
       phonenumber: req.body.phonenumber,
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      user_text: req.body.user_text,
-      user_image: req.body.user_image,
-      reporting_category: req.body.reporting_category,
-      user_ip: req.headers[`x-forwarded-for`]?.split(`,`).shift()
-      || req.socket?.remoteAddress,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      description: req.body.description,
+      ip: req.headers[`x-forwarded-for`]?.split(`,`).shift() || req.socket?.remoteAddress,
+      image: req.body.user_image,
+      reporting_category_id: reportingCategory,
       town_hall_id: req.params.town_hall_id,
     };
+    console.log(values.ip);
     const report = await dataMapperReporting.postReport(values);
     if (report.rowCount) {
-      res.status(200).send(`Le signalement ${req.body.title} de ${req.body.first_name} est effectué.`);
+      res.status(200).send(`Le signalement ${req.body.title} de ${req.body.firstname} est effectué.`);
     } else {
       const err = new Error(
-        `Impossible de poster votre  signalement.`,
+        `Impossible de poster votre signalement.`,
       );
       next(err);
     }

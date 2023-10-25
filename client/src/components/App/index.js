@@ -31,7 +31,7 @@ function App() {
    * @toggleMenu open menu component
    */
   useEffect(() => {
-    dispatch(setTownHallId(6));
+    dispatch(setTownHallId(1));
     dispatch(toggleMenu(true));
     dispatch(getCouncilMembers());
   });

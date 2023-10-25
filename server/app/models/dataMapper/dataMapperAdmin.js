@@ -18,16 +18,16 @@ const datamapper = {
    */
   async getTownHallId(insee) {
     const query = {
-      text: `SELECT id_mairie 
-            FROM mairie
-            WHERE mairie.insee = $1`,
+      text: `SELECT town_hall_id 
+            FROM town_hall
+            WHERE town_hall.insee = $1`,
       values: [insee],
     };
     const idTownHall = await client.query(query);
     if (!idTownHall.rowCount) {
       throw new Error(`Le code Insee est invalide !`);
     }
-    return idTownHall.rows[0].id_mairie;
+    return idTownHall.rows[0].town_hall_id;
   },
   /**
    * The method allows you to create an administrator
@@ -43,7 +43,7 @@ const datamapper = {
   async userSignup(pseudo, hashPassword, email, idTownHall) {
     const query = {
       text: ` INSERT INTO admin
-              (pseudo,password,email,mairie_id)
+              (pseudo,password,email,town_hall_id)
               VALUES
               ($1,$2,$3,$4);`,
       values: [pseudo, hashPassword, email, idTownHall],
@@ -78,7 +78,7 @@ const datamapper = {
    */
   async getOneAdmin(email) {
     const query = {
-      text: `SELECT * FROM "admin" WHERE email = $1`,
+      text: `SELECT * FROM admin WHERE email = $1`,
       values: [email],
     };
     const data = await client.query(query);

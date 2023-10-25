@@ -18,21 +18,21 @@ const dataMapperReporting = {
       // text: `SELECT * FROM signalement
       // eslint-disable-next-line max-len
       //       WHERE mairie_id = $1 ORDER BY reporting_statut = $2, reporting_statut = $3, reporting_statut = $4, reporting_statut = $5 DESC;`,
-      text: `SELECT * FROM signalement as s
+      text: `SELECT * FROM reporting as r
               JOIN 
-                (SELECT signalement_categorie.id_signalement_categorie, signalement_categorie.nom as signalement_categorie_nom
-                FROM signalement_categorie) as  cat
-                ON s.signalement_categorie_id = cat.id_signalement_categorie
+                (SELECT reporting_category.reporting_category_id, reporting_category.name as reporting_category
+                FROM reporting_category) as  cat
+                ON r.reporting_category_id = cat.reporting_category_id
               JOIN
-                (SELECT signalement_status.id_signalement_status, signalement_status.nom as signalement_status_nom
-                FROM signalement_status) as stat
-                ON s.signalement_status_id = stat.id_signalement_status
-              WHERE s.mairie_id = $1
+                (SELECT reporting_status.reporting_status_id, reporting_status.name as reporting_status
+                FROM reporting_status) as stat
+                ON r.reporting_status_id = stat.reporting_status_id
+              WHERE r.town_hall_id = $1
               ORDER BY CASE
-                WHEN signalement_status_nom = $2 THEN 1
-                WHEN signalement_status_nom = $3 THEN 2
-                WHEN signalement_status_nom = $4 THEN 3
-                WHEN signalement_status_nom = $5 THEN 4
+                WHEN reporting_status = $2 THEN 1
+                WHEN reporting_status = $3 THEN 2
+                WHEN reporting_status = $4 THEN 3
+                WHEN reporting_status = $5 THEN 4
                 END ASC`,
       values: [townHallId, `Non validé`, `Non résolu`, `Résolu`, `En cours`],
     };
@@ -48,21 +48,20 @@ const dataMapperReporting = {
    */
   async getAllReportVisitor(townHallId) {
     const query = {
-      text: `SELECT * FROM signalement as s
-              JOIN 
-                (SELECT signalement_categorie.id_signalement_categorie, signalement_categorie.nom as signalement_categorie_nom
-                FROM signalement_categorie) as  cat
-                ON s.signalement_categorie_id = cat.id_signalement_categorie
-              JOIN
-                (SELECT signalement_status.id_signalement_status, signalement_status.nom as signalement_status_nom
-                FROM signalement_status) as stat
-                ON s.signalement_status_id = stat.id_signalement_status
-              WHERE s.mairie_id = $1
-              AND NOT signalement_status_nom LIKE '%validé'
-              ORDER BY CASE
-                WHEN signalement_status_nom = $2 THEN 1
-                WHEN signalement_status_nom = $3 THEN 2
-                WHEN signalement_status_nom = $4 THEN 3
+      text: `SELECT * FROM reporting as r
+                JOIN 
+                  (SELECT reporting_category.reporting_category_id, reporting_category.name as reporting_category
+                  FROM reporting_category) as  cat
+                  ON r.reporting_category_id = cat.reporting_category_id
+                JOIN
+                  (SELECT reporting_status.reporting_status_id, reporting_status.name as reporting_status
+                  FROM reporting_status) as stat
+                  ON r.reporting_status_id = stat.reporting_status_id
+                WHERE r.town_hall_id = $1
+                ORDER BY CASE
+                WHEN reporting_status = $2 THEN 1
+                WHEN reporting_status = $3 THEN 2
+                WHEN reporting_status = $4 THEN 3
                 END ASC`,
       values: [townHallId, `Non résolu`, `En cours`, `Résolu`],
     };
@@ -79,8 +78,8 @@ const dataMapperReporting = {
    */
   async getOneReport(reportId) {
     const query = {
-      text: `SELECT * FROM signalement
-      WHERE id_signalement = $1;`,
+      text: `SELECT * FROM reporting
+      WHERE reporting_id = $1;`,
       values: [reportId],
     };
     const data = await client.query(query);
@@ -95,8 +94,8 @@ const dataMapperReporting = {
    */
   async deleteReport(id) {
     const query = {
-      text: `DELETE FROM signalement
-            WHERE id_signalement = $1`,
+      text: `DELETE FROM reporting
+            WHERE reporting_id = $1`,
       values: [id],
     };
     const data = await client.query(query);
@@ -112,7 +111,7 @@ const dataMapperReporting = {
   async modifyReport(object) {
     const query = {
       text: `UPDATE reporting
-      SET admin_text = $1, reporting_statut = $2
+      SET admin_text = $1, reporting_status_id = $2
       WHERE reporting_id = $3; `,
       // eslint-disable-next-line max-len
       values: [
@@ -127,31 +126,64 @@ const dataMapperReporting = {
   /**
    * The method is used to post a report as a visitor
    * @menberof dataMapperReporting
-   * @method modifyReport
+   * @method PATCH
    * @param {Object} object
    * @returns void
    */
   async postReport(object) {
     const query = {
       text: `INSERT INTO reporting
-            (title, email, phonenumber, first_name, last_name, user_text, user_image, reporting_category, user_ip, town_hall_id)
-      VALUES ($1, $2, $3, $4,  $5,  $6, $7, $8, $9, $10)`,
+            (title, email, phonenumber, firstname, lastname, description, ip, image, reporting_category_id, town_hall_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
       // eslint-disable-next-line max-len
       values: [
         object.title,
         object.email,
         object.phonenumber,
-        object.first_name,
-        object.last_name,
-        object.user_text,
-        object.user_image,
-        object.reporting_category,
-        object.user_ip,
+        object.firstname,
+        object.lastname,
+        object.description,
+        object.ip,
+        object.image,
+        object.reporting_category_id,
         object.town_hall_id,
       ],
     };
     const data = await client.query(query);
     return data;
+  },
+  /**
+   * Method to get reporting_status_id
+   * @memberof dataMapperReporting
+   * @method GET
+   * @param string statusName
+   * @returns number reporting_status_id
+   */
+  async getOneReportingStatus(statusName) {
+    const query = {
+      text: `SELECT reporting_status_id
+            FROM reporting_status
+            WHERE name = $1`,
+      values: [statusName],
+    };
+    const data = await client.query(query);
+    return data.rows[0];
+  },
+  /**
+   * Method to get reporting_category_name
+   * @memberof dataMapperReporting
+   * @param string categoryName
+   * @returns number reporting_category_id
+   */
+  async getOneReportingCategory(categoryName) {
+    const query = {
+      text: `SELECT reporting_category_id
+            FROM reporting_category
+            WHERE name = $1`,
+      values: [categoryName],
+    };
+    const data = await client.query(query);
+    return data.rows[0];
   },
 };
 

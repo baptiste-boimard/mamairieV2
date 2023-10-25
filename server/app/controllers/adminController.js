@@ -82,12 +82,12 @@ const adminController = {
         req.body.email,
         existingUser.password,
       );
-      console.log(data);
-      const user = { pseudo: data.pseudo, town_hall_id: data.mairie_id };
+      // eslint-disable-next-line max-len
+      const user = { pseudo: data.pseudo, town_hall_id: data.town_hall_id, admin_id: data.admin_id };
       const townHallId = user.town_hall_id;
-      console.log(townHallId);
+      const adminId = user.admin_id;
       const accessToken = jwt.sign(user, secretKey);
-      res.json({ accessToken, townHallId });
+      res.json({ accessToken, townHallId, adminId });
       // res.json({ user, townHallId });
     } else {
       const err = new Error(`La connexion a échoué vérifier vos données.`);

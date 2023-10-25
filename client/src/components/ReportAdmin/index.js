@@ -29,7 +29,7 @@ function ReportAdmin() {
 
   /** filtering report admin list by report if in params */
   const report = useSelector((state) => state.reports.reportsAdminList
-    .find((p) => p.id_signalement === Number(params.reporting_id)));
+    .find((p) => p.reporting_id === Number(params.reporting_id)));
   const {
     message, messageColor,
   } = useSelector((state) => state.utilities);
@@ -62,7 +62,7 @@ function ReportAdmin() {
     if (textAreaValue && reporting_statut) {
       dispatch(changeCheckboxAdminReporting(''));
       dispatch(submitModerateReporting(
-        report.id_signalement,
+        report.reporting_id,
         report.title,
         textAreaValue,
         reporting_statut,
@@ -99,29 +99,29 @@ function ReportAdmin() {
   return (
     <div className="reportAdmin">
       <div className="reportAdmin-date">
-        <Label className={`${report.signalement_categorie_nom} reportAdmin-category`}>
-          {report.signalement_categorie_nom}
+        <Label className={`${report.reporting_category} reportAdmin-category`}>
+          {report.reporting_category}
         </Label>
         <Moment format="DD/MM/YYYY" className="reportAdmin-date">{report.created_at}</Moment>
       </div>
       <div className="reportAdmin-header">
         <div className="reportAdmin-title">
-          <h2>{report.titre}</h2>
-          <span className={`reportAdmin-statut reportAdmin-statut--${report.signalement_status_nom.replace(' ', '_')}`}>{report.signalement_status_nom}</span>
+          <h2>{report.title}</h2>
+          <span className={`reportAdmin-statut reportAdmin-statut--${report.reporting_status.replace(' ', '_')}`}>{report.reporting_status}</span>
         </div>
       </div>
       <div className="reportAdmin-info">
         <h3>Coordonnées du signalant :</h3>
-        <p className="reportAdmin-firstName">Prénom : {report.prenom}</p>
-        <p className="reportAdmin-lastName">Nom : {report.nom}</p>
-        <p className="reportAdmin-phone">Numéro de téléphone : {report.telephone}</p>
+        <p className="reportAdmin-firstName">Prénom : {report.firstname}</p>
+        <p className="reportAdmin-lastName">Nom : {report.lastname}</p>
+        <p className="reportAdmin-phone">Numéro de téléphone : {report.phonenumber}</p>
         <p value={report.email} className="reportAdmin-mail">Adresse mail : {report.email}</p>
         <p className="reportAdmin-description">Description : {report.description}</p>
         { report.image && (
           <img
             className="reportAdmin-image"
             src={report.image}
-            alt={report.titre}
+            alt={report.title}
           />
         )}
 
@@ -136,7 +136,7 @@ function ReportAdmin() {
             value={textAreaValue || undefined}
             onChange={handleChange}
             title="Réponse"
-            name={`textArea-${report.id_signalement}`}
+            name={`textArea-${report.reporting_id}`}
           />
           <div className="reportAdmin-newStatut">
             <div className="reportAdmin-checkbox">
