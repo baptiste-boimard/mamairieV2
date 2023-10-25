@@ -155,7 +155,6 @@ const adminReportingController = {
    */
   async postReporting(req, res, next) {
     const reportingCategory = await dataMapperReporting.getOneReportingCategory(req.body.reporting_category);
-
     const values = {
       title: req.body.title,
       email: req.body.email,
@@ -165,10 +164,9 @@ const adminReportingController = {
       description: req.body.description,
       ip: req.headers[`x-forwarded-for`]?.split(`,`).shift() || req.socket?.remoteAddress,
       image: req.body.user_image,
-      reporting_category_id: reportingCategory,
+      reporting_category_id: reportingCategory.reporting_category_id,
       town_hall_id: req.params.town_hall_id,
     };
-    console.log(values.ip);
     const report = await dataMapperReporting.postReport(values);
     if (report.rowCount) {
       res.status(200).send(`Le signalement ${req.body.title} de ${req.body.firstname} est effectué.`);

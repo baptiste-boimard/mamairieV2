@@ -20,6 +20,7 @@ const handleError = async (error, req, res, next) => {
       message: error.message,
     },
   });
+  next();
 };
 
 module.exports = handleError;

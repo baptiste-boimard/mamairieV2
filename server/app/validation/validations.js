@@ -7,6 +7,7 @@ const validationModule = {
           error.message === `"password" with value "${req.body.password}" fails to match the required pattern: /^([a-zA-Z0-9@*#!?]{8,15})$/`
         ) {
           const err = new Error(
+            // eslint-disable-next-line max-len
             `Le mot de passe doit contenir une majuscule un caractère spécial est au minimum 8 caractères et maximum 15 caractères les chiffres sont autorisés.`,
           );
           err.status = 400;
@@ -19,7 +20,7 @@ const validationModule = {
           next(err);
         } else if (error.message === `"length must be less than or equal to 10 characters long"`) {
           const err = new Error(
-            `Le numéro de téléphone doit contenir au minimum 10 caractères est maximum 10 caractères .`,
+            `Le numéro de téléphone doit contenir 10 caractères`,
           );
           err.status = 400;
           next(err);
