@@ -856,5 +856,13 @@ router.patch(
   validateUpdateCouncilMember(schemaUpdateCouncilMember),
   routerWrapper(adminControllerCouncil.modifyMemberCouncil),
 );
+router.post(
+  `/me`,
+  authenticateToken,
+  // routerWrapper(adminController.checkToken),
+  (req, res) => {
+    res.send(`coucou`);
+  },
+);
 
 module.exports = router;

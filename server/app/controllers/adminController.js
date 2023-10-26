@@ -1,7 +1,6 @@
 require(`dotenv`).config();
 const bcrypt = require(`bcrypt`);
 const jwt = require(`jsonwebtoken`);
-const secretKey = process.env.ACCES_TOKEN_SECRET;
 const { dataMapperAdmin } = require(`../models/dataMapper/index`);
 
 /**
@@ -66,6 +65,8 @@ const adminController = {
    * @returns {Object} Return token and town_hall_id
    */
   async login(req, res, next) {
+    const { token } = req.body;
+    console.log('token', token);
     const existingUser = await dataMapperAdmin.getOneAdmin(req.body.email);
 
     if (!existingUser) {
@@ -82,18 +83,22 @@ const adminController = {
         req.body.email,
         existingUser.password,
       );
-      // eslint-disable-next-line max-len
       const user = { pseudo: data.pseudo, town_hall_id: data.town_hall_id, admin_id: data.admin_id };
       const townHallId = user.town_hall_id;
       const adminId = user.admin_id;
-      const accessToken = jwt.sign(user, secretKey);
+
+      // Create Token
+      const accessToken = jwt.sign(user, process.env.ACCES_TOKEN_SECRET, { expiresIn: `1800s` });
+
       res.json({ accessToken, townHallId, adminId });
-      // res.json({ user, townHallId });
     } else {
       const err = new Error(`La connexion a échoué vérifier vos données.`);
       next(err);
     }
   },
+  // checkToken(req, res, next) {
+  //   const
+  // },
 };
 
 module.exports = adminController;
