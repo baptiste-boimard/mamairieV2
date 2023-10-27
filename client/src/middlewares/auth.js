@@ -58,10 +58,8 @@ const auth = (store) => (next) => (action) => {
            * @login change value state login
            * @redirect redirect to value
            */
-          console.log(response.data);
           store.dispatch(login());
           store.dispatch(setTownHallId(response.data.townHallId));
-          console.log(response.data.townHallId);
           store.dispatch(redirect('/admin'));
           store.dispatch(eraseEmailPasswordState());
 
