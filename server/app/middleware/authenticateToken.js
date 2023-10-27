@@ -10,20 +10,13 @@ const jwt = require(`jsonwebtoken`);
  * @returns {String} Returns administrator id
  */
 const authenticateToken = (req, res, next) => {
-  // const authHeader = req.body.token;
-  // console.log(authHeader);
-  // const token = authHeader && authHeader.split(` `)[1];
-  console.log(`PARAMS`, req.params);
-  // const tokenQuery = req.query;
-  // console.log(`Query`, tokenQuery);
-  const { token } = req.body;
-  // console.log(`authenticate token`, token, req.body);
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(` `)[1];
   if (token == null) {
     const err = new Error(`Vous devez être connecté pour accéder à cette page.`);
     err.status = 401;
     next(err);
   }
-
   jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (error, user) => {
     if (error) {
       const err = new Error(`Votre session a expiré, merci de vous reconnecter.`);

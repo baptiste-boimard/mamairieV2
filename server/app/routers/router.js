@@ -176,7 +176,7 @@ router.post(`/login`, routerWrapper(adminController.login));
  */
 router.get(
   `/admin/reporting/:town_hall_id`,
-  // authenticateToken,
+  authenticateToken,
   routerWrapper(adminReportingController.allReporting),
 );
 

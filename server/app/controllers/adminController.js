@@ -95,8 +95,10 @@ const adminController = {
     }
   },
   checkToken(req, res) {
-    const decodedToken = jwt.decode(req.body.token, process.env.ACCES_TOKEN_SECRET, { algorithms: [`HS256`] });
-    res.json(decodedToken);
+    console.log(`coucou`, req.admin);
+    res.send(`ok`);
+    // const decodedToken = jwt.decode(req.body.token, process.env.ACCES_TOKEN_SECRET, { algorithms: [`HS256`] });
+    // res.json(decodedToken);
   },
 };
 
