@@ -80,12 +80,20 @@ const auth = (store) => (next) => (action) => {
         });
       break;
     case CHECK_TOKEN:
+      // store.dispatch(eraseReportingFields());
+      store.dispatch(setMessage('', false));
       instance.get('/admin/me')
         .then(() => {
           store.dispatch(login());
         })
         .catch((error) => {
-          console.log(error);
+          store.dispatch(setLogout());
+          // Delete token if one already exists
+          if (localStorage.getItem('accessToken') !== 'null') {
+            localStorage.removeItem('accessToken');
+          }
+          // store.dispatch(setMessage(error.response.data.error.message, false));
+
           // Ouverture d'une modal annoncant erreur de refresh => connexion à nouveau
         });
       break;
@@ -95,9 +103,8 @@ const auth = (store) => (next) => (action) => {
        * @setLogout change state value login
        * @setMessage set a success message
        */
-      delete instance.defaults.headers.common.Authorization;
+      // delete instance.defaults.headers.common.Authorization;
       localStorage.removeItem('accessToken');
-      console.log('LOGOUT', localStorage.getItem('acessToken'));
       store.dispatch(setLogout());
       store.dispatch(setMessage('Vous êtes déconnecté', true));
       break;
