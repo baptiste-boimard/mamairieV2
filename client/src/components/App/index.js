@@ -31,13 +31,11 @@ function App() {
    * @toggleMenu open menu component
    */
   useEffect(() => {
-    const bearer = localStorage.getItem('accessToken');
-    console.log(bearer);
     dispatch(checkToken());
     dispatch(setTownHallId(1));
     dispatch(toggleMenu(true));
     dispatch(getCouncilMembers());
-  });
+  }, []);
 
   return (
     <div className="app">

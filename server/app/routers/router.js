@@ -858,7 +858,7 @@ router.patch(
 );
 // TODO doc
 router.get(
-  `/me`,
+  `/admin/me`,
   authenticateToken,
   routerWrapper(adminController.checkToken),
 );

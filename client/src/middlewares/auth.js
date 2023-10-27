@@ -9,18 +9,17 @@ import {
   LOGOUT,
   setLogout,
   setTownHallId,
+  CHECK_TOKEN,
 } from '../actions/login';
 import { redirect, setMessage, eraseEmailPasswordState } from '../actions/utilities';
 
 /** Instance of axios with options */
 const instance = axios.create({
   baseURL: 'http://localhost:3030',
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  },
 });
-
-// if (localStorage.getItem('accessToken')) {
-//   const accessToken = localStorage.getItem('accessToken');
-//   instance.defaults.headers.common.Authorization = `bearer ${accessToken}`;
-// }
 
 const auth = (store) => (next) => (action) => {
   switch (action.type) {
@@ -63,7 +62,12 @@ const auth = (store) => (next) => (action) => {
           store.dispatch(redirect('/admin'));
           store.dispatch(eraseEmailPasswordState());
 
-          /** Récupération du token d'authendification lors du login */
+          // Delete token if one already exists
+          if (localStorage.getItem('accessToken') !== 'null') {
+            localStorage.removeItem('accessToken');
+          }
+
+          // Save token to localStorage
           const { accessToken } = response.data;
           instance.defaults.headers.common.Authorization = `bearer ${accessToken}`;
           localStorage.setItem('accessToken', accessToken);
@@ -75,6 +79,16 @@ const auth = (store) => (next) => (action) => {
           store.dispatch(setMessage(error.response.data.error.message, false));
         });
       break;
+    case CHECK_TOKEN:
+      instance.get('/admin/me')
+        .then(() => {
+          store.dispatch(login());
+        })
+        .catch((error) => {
+          console.log(error);
+          // Ouverture d'une modal annoncant erreur de refresh => connexion à nouveau
+        });
+      break;
     case LOGOUT: {
       /** On logout
        * @delete delete token from intance and localstorage
@@ -82,7 +96,8 @@ const auth = (store) => (next) => (action) => {
        * @setMessage set a success message
        */
       delete instance.defaults.headers.common.Authorization;
-      localStorage.removeItem('token');
+      localStorage.removeItem('accessToken');
+      console.log('LOGOUT', localStorage.getItem('acessToken'));
       store.dispatch(setLogout());
       store.dispatch(setMessage('Vous êtes déconnecté', true));
       break;

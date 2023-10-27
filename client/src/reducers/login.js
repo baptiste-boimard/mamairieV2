@@ -8,7 +8,7 @@ import {
 } from '../actions/login';
 
 export const initialState = {
-  logged: true,
+  logged: false,
   isOpenSignup: false,
   isOpenLogin: false,
   activeConnectionButton: false,
