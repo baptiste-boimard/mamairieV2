@@ -176,7 +176,7 @@ router.post(`/login`, routerWrapper(adminController.login));
  */
 router.get(
   `/admin/reporting/:town_hall_id`,
-  authenticateToken,
+  // authenticateToken,
   routerWrapper(adminReportingController.allReporting),
 );
 
@@ -856,13 +856,11 @@ router.patch(
   validateUpdateCouncilMember(schemaUpdateCouncilMember),
   routerWrapper(adminControllerCouncil.modifyMemberCouncil),
 );
-router.post(
+// TODO doc
+router.get(
   `/me`,
   authenticateToken,
-  // routerWrapper(adminController.checkToken),
-  (req, res) => {
-    res.send(`coucou`);
-  },
+  routerWrapper(adminController.checkToken),
 );
 
 module.exports = router;

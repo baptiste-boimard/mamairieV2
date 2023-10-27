@@ -15,6 +15,8 @@ const adminReportingController = {
    * @returns Return all reports Administrator
    */
   async allReporting(req, res, next) {
+    console.log(`allreporiting`, req.params);
+    console.log(`admin`, req.admin);
     if (parseInt(req.params.town_hall_id, 10) !== req.admin.town_hall_id) {
       const err = new Error(
         `Vous n'êtes pas autorisé à accéder à cette page.`,
@@ -22,6 +24,7 @@ const adminReportingController = {
       err.status = 401;
       next(err);
     }
+    console.log('avant request', req.params.town_hall_id);
     const Allreporting = await dataMapperReporting.getAllReport(
       req.params.town_hall_id,
     );

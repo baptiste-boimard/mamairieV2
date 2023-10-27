@@ -65,8 +65,6 @@ const adminController = {
    * @returns {Object} Return token and town_hall_id
    */
   async login(req, res, next) {
-    const { token } = req.body;
-    console.log('token', token);
     const existingUser = await dataMapperAdmin.getOneAdmin(req.body.email);
 
     if (!existingUser) {
@@ -88,7 +86,7 @@ const adminController = {
       const adminId = user.admin_id;
 
       // Create Token
-      const accessToken = jwt.sign(user, process.env.ACCES_TOKEN_SECRET, { expiresIn: `1800s` });
+      const accessToken = jwt.sign(user, process.env.ACCES_TOKEN_SECRET, { expiresIn: `1800s`, algorithm: `HS256` });
 
       res.json({ accessToken, townHallId, adminId });
     } else {
@@ -96,9 +94,10 @@ const adminController = {
       next(err);
     }
   },
-  // checkToken(req, res, next) {
-  //   const
-  // },
+  checkToken(req, res) {
+    const decodedToken = jwt.decode(req.body.token, process.env.ACCES_TOKEN_SECRET, { algorithms: [`HS256`] });
+    res.json(decodedToken);
+  },
 };
 
 module.exports = adminController;
