@@ -61,3 +61,9 @@ export const setTownHallId = (townHallId) => ({
   type: SET_TOWNHALL_ID,
   townHallId,
 });
+
+/** Check token validity on refresh */
+export const CHECK_TOKEN = 'CHECK_TOKEN';
+export const checkToken = () => ({
+  type: CHECK_TOKEN,
+});

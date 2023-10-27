@@ -58,14 +58,12 @@ const auth = (store) => (next) => (action) => {
            * @login change value state login
            * @redirect redirect to value
            */
-          console.log(response.data);
           store.dispatch(login());
           store.dispatch(setTownHallId(response.data.townHallId));
-          console.log(response.data.townHallId);
           store.dispatch(redirect('/admin'));
           store.dispatch(eraseEmailPasswordState());
 
-          /** Récupération du tokend d'authendification lors du login */
+          /** Récupération du token d'authendification lors du login */
           const { accessToken } = response.data;
           instance.defaults.headers.common.Authorization = `bearer ${accessToken}`;
           localStorage.setItem('accessToken', accessToken);
