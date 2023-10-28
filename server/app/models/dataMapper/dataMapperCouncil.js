@@ -32,7 +32,7 @@ const dataMapperCouncil = {
     const query = {
       text: `INSERT INTO town_hall_staff(lastname, firstname, role, photo, town_hall_id)
             VALUES($1, $2, $3, $4 ,$5)`,
-      values: [object.lastName, object.firstName, object.role, object.photo, object.townHallId],
+      values: [object.lastname, object.firstname, object.role, object.photo, object.townHallId],
     };
     const data = await client.query(query);
     return data;
@@ -66,7 +66,7 @@ const dataMapperCouncil = {
       SET lastname = $1, firstname = $2, role = $3, photo = $4
       WHERE town_hall_staff_id = $5; `,
       // eslint-disable-next-line max-len
-      values: [object.lastName, object.firstName, object.role, object.photo, object.townHallStaffId],
+      values: [object.lastname, object.firstname, object.role, object.photo, object.townHallStaffId],
     };
     const data = await client.query(query);
     return data;

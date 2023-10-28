@@ -45,6 +45,7 @@ function Login() {
     if (redirectTo !== '') {
       navigate(redirectTo);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** Clicking on connection button

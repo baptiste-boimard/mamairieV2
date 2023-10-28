@@ -34,8 +34,8 @@ const adminControllerCouncil = {
    */
   async postOneMember(req, res, next) {
     const member = {
-      lastName: req.body.lastname,
-      firstName: req.body.firstname,
+      lastname: req.body.lastname,
+      firstname: req.body.firstname,
       role: req.body.role,
       photo: req.body.photo,
       townHallId: req.params.town_hall_id,
@@ -94,12 +94,13 @@ const adminControllerCouncil = {
       next(err);
     }
     const values = {
-      lastName: req.body.lastname,
-      firstName: req.body.firstname,
+      lastname: req.body.lastname,
+      firstname: req.body.firstname,
       role: req.body.role,
       photo: req.body.photo,
       townHallStaffId: req.params.town_hall_staff_id,
     };
+    console.log(values);
     const report = await dataMapperCouncil.modifyCouncil(values);
     if (report.rowCount) {
       res.status(200).send(`La mise à jour du membre du conseiller, c'est bien passé.`);

@@ -23,7 +23,6 @@ const councilApi = (store) => (next) => (action) => {
           /** success of get request
            * @setCouncilMembers save member to state value
            */
-          console.log(response.data);
           store.dispatch(setCouncilMembers(response.data));
         })
         .catch(() => {
@@ -35,8 +34,8 @@ const councilApi = (store) => (next) => (action) => {
       break;
     case POST_COUNCIL_MEMBERS:
       instance.post(`/admin/council/${townHallId}`, {
-        first_name: 'Prénom',
-        last_name: 'Nom',
+        lastname: 'Nom',
+        firstname: 'Prénom',
         photo: 'https://react.semantic-ui.com/images/wireframe/image.png',
         role: 'Fonction',
         town_hall_id: townHallId,
@@ -56,8 +55,8 @@ const councilApi = (store) => (next) => (action) => {
       break;
     case PATCH_COUNCIL_MEMBERS:
       instance.patch(`/admin/council/${townHallId}/${action.id}`, {
-        first_name: action.firstName,
-        last_name: action.lastName,
+        firstname: action.firstname,
+        lastname: action.lastname,
         photo: action.photo,
         role: action.role,
         town_hall_id: townHallId,
