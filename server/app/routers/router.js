@@ -856,5 +856,11 @@ router.patch(
   validateUpdateCouncilMember(schemaUpdateCouncilMember),
   routerWrapper(adminControllerCouncil.modifyMemberCouncil),
 );
+// // TODO doc
+// router.get(
+//   `/admin/me`,
+//   authenticateToken,
+//   routerWrapper(adminController.checkToken),
+// );
 
 module.exports = router;

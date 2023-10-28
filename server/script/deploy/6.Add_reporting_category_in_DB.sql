@@ -6,7 +6,7 @@ INSERT INTO public.reporting_category(name)
 VALUES ('Voirie');
 
 INSERT INTO public.reporting_category(name)
-VALUES ('Eclairage');
+VALUES ('Eclairage public');
 
 INSERT INTO public.reporting_category(name)
 VALUES ('Voisinage');

@@ -9,12 +9,17 @@ const jwt = require(`jsonwebtoken`);
  * @param {Function} next
  * @returns {String} Returns administrator id
  */
+
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(` `)[1];
-  if (token == null) {
+
+  // if()
+
+  if (token === `null` && req.route.path === `/admin/me`) {
     const err = new Error(`Vous devez être connecté pour accéder à cette page.`);
     err.status = 401;
+    // res.send(`No Token`);
     next(err);
   }
   jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (error, user) => {
