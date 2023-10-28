@@ -13,13 +13,11 @@ const jwt = require(`jsonwebtoken`);
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(` `)[1];
+  // console.log(`authen middle`, req.headers);
 
-  // if()
-
-  if (token === `null` && req.route.path === `/admin/me`) {
+  if (token === `null`) {
     const err = new Error(`Vous devez être connecté pour accéder à cette page.`);
     err.status = 401;
-    // res.send(`No Token`);
     next(err);
   }
   jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (error, user) => {

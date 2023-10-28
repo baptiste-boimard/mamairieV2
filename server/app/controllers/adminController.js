@@ -86,7 +86,7 @@ const adminController = {
       const adminId = user.admin_id;
 
       // Create Token
-      const accessToken = jwt.sign(user, process.env.ACCES_TOKEN_SECRET, { expiresIn: `1800s`, algorithm: `HS256` });
+      const accessToken = jwt.sign(user, process.env.ACCES_TOKEN_SECRET, { expiresIn: `60s`, algorithm: `HS256` });
 
       res.json({ accessToken, townHallId, adminId });
     } else {

@@ -36,7 +36,6 @@ function App() {
     if (token !== null) {
       dispatch(login());
     }
-    // dispatch(checkToken());
     dispatch(setTownHallId(1));
     dispatch(toggleMenu(true));
     dispatch(getCouncilMembers());

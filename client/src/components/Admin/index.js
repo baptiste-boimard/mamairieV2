@@ -2,12 +2,23 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Message } from 'semantic-ui-react';
 
+// import { getAdminReports, getReports } from '../../actions/reports';
+
 import Field from '../Field';
 import Login from '../Login';
 import './style.scss';
+// import { setMessage } from '../../actions/utilities';
 
 function Admin() {
+  // const dispatch = useDispatch();
   const { logged } = useSelector((state) => state.login);
+
+  // const getAdminReporting = () => {
+  //   // window.location.reload(false);
+  //   dispatch((setMessage('', '')));
+  //   dispatch(getAdminReports());
+  //   dispatch(getReports());
+  // };
   return (
     <div className="admin">
       <Login />

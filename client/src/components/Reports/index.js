@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { Dropdown, Loader, Message } from 'semantic-ui-react';
@@ -17,6 +17,8 @@ import './style.scss';
 
 function Reports() {
   const dispatch = useDispatch();
+
+  // const { logged } = useSelector((state) => state.login);
 
   const {
     isReporting,
@@ -49,6 +51,7 @@ function Reports() {
     } else {
       dispatch(getReports());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** list of month in french fot moment */
@@ -122,48 +125,48 @@ function Reports() {
 
       {/* Section to filter reports list */}
       {!isReporting && (
-        <section className="filter-section">
-          <Dropdown
-            className="filter-dropdown categories"
-            placeholder="Catégories"
-            title="Catégories"
-            fluid
-            selection
-            onChange={handleChangeFilter}
-            options={categoriesOptions}
-            name="selectedCategory"
-          />
-          <Dropdown
-            className="filter-dropdown"
-            placeholder="Mois"
-            title="Mois"
-            fluid
-            selection
-            onChange={handleChangeFilter}
-            options={monthOptions}
-            name="selectedMonth"
-          />
-          <Dropdown
-            className="filter-dropdown"
-            placeholder="Année"
-            title="Année"
-            fluid
-            selection
-            onChange={handleChangeFilter}
-            options={yearOptions}
-            name="selectedYear"
-          />
-        </section>
+      <section className="filter-section">
+        <Dropdown
+          className="filter-dropdown categories"
+          placeholder="Catégories"
+          title="Catégories"
+          fluid
+          selection
+          onChange={handleChangeFilter}
+          options={categoriesOptions}
+          name="selectedCategory"
+        />
+        <Dropdown
+          className="filter-dropdown"
+          placeholder="Mois"
+          title="Mois"
+          fluid
+          selection
+          onChange={handleChangeFilter}
+          options={monthOptions}
+          name="selectedMonth"
+        />
+        <Dropdown
+          className="filter-dropdown"
+          placeholder="Année"
+          title="Année"
+          fluid
+          selection
+          onChange={handleChangeFilter}
+          options={yearOptions}
+          name="selectedYear"
+        />
+      </section>
       )}
 
       {/* Section for reports list */}
       { loading && (
-        <Loader active inline="centered" />
+      <Loader active inline="centered" />
       )}
       {!isReporting && !loading && (
-        <section className="reports-container">
-          {filteredReports.map((report) => <Report key={report.reporting_id} {...report} />)}
-        </section>
+      <section className="reports-container">
+        {filteredReports.map((report) => <Report key={report.reporting_id} {...report} />)}
+      </section>
       )}
     </div>
   );

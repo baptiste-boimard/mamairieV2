@@ -15,7 +15,6 @@ import Moment from 'react-moment';
 import {
   deleteSelectedReport,
   eraseValueActiveIndex,
-  getAdminReports,
   setActiveIndex,
 } from '../../../actions/reports';
 
@@ -115,7 +114,7 @@ function Report({
               </Message>
             ) : (
               <Message negative>
-                <p>Vous n'avez pas encore traité ce signalement</p>
+                <p>La mairie pas n'a pas encore traité ce signalement</p>
               </Message>
             )}
             {logged && window.location.pathname.includes('admin') && (

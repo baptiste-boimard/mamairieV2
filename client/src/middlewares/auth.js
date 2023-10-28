@@ -18,7 +18,7 @@ import { redirect, setMessage, eraseEmailPasswordState } from '../actions/utilit
 const instance = axios.create({
   baseURL: 'http://localhost:3030',
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    // Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
   },
 });
 
@@ -62,16 +62,21 @@ const auth = (store) => (next) => (action) => {
           store.dispatch(setTownHallId(response.data.townHallId));
           store.dispatch(redirect('/admin'));
           store.dispatch(eraseEmailPasswordState());
+          store.dispatch(setMessage('', ''));
 
           // Delete token if one already exists
-          if (localStorage.getItem('accessToken') !== 'null') {
-            localStorage.removeItem('accessToken');
-          }
+          // if (localStorage.getItem('accessToken') !== 'null') {
+          //   localStorage.removeItem('accessToken');
+          // }
 
           // Save token to localStorage
           const { accessToken } = response.data;
-          instance.defaults.headers.common.Authorization = `bearer ${accessToken}`;
+          instance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+          // instance.headers.Authorization = `Bearer ${accessToken}`;
+          // console.log('instance', instance.defaults.headers.common.Authorization);
+          // console.log('instance header', instance.headers.Authorization);
           localStorage.setItem('accessToken', accessToken);
+          window.location.reload(false);
         })
         .catch((error) => {
           /** error on request
@@ -108,8 +113,13 @@ const auth = (store) => (next) => (action) => {
        * @setLogout change state value login
        * @setMessage set a success message
        */
-      // delete instance.defaults.headers.common.Authorization;
+      delete instance.defaults.headers.common.Authorization;
+
+      // console.log('avant', instance.defaults.headers.common.Authorization);
+      // instance.defaults.headers.common.Authorization = '';
+      // console.log('arpes', instance.defaults.headers.common.Authorization);
       localStorage.removeItem('accessToken');
+
       store.dispatch(setLogout());
       store.dispatch(setMessage('Vous êtes déconnecté', true));
       break;
