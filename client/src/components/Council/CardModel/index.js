@@ -26,11 +26,11 @@ function CardModel({ ...card }) {
   const dispatch = useDispatch();
 
   const adminLogged = useSelector((state) => state.login.logged);
-  const isOpenModal = useSelector((state) => state.council[`isOpenModalMember-${card.id_personnel_mairie}`]);
-  const lastNameValue = useSelector((state) => state.utilities[`lastNameMember-${card.id_personnel_mairie}`]);
-  const firstNameValue = useSelector((state) => state.utilities[`firstNameMember-${card.id_personnel_mairie}`]);
-  const roleValue = useSelector((state) => state.utilities[`roleMember-${card.id_personnel_mairie}`]);
-  const photoValue = useSelector((state) => state.utilities[`photoMember-${card.id_personnel_mairie}`]);
+  const isOpenModal = useSelector((state) => state.council[`isOpenModalMember-${card.town_hall_staff_id}`]);
+  const lastNameValue = useSelector((state) => state.utilities[`lastNameMember-${card.town_hall_staff_id}`]);
+  const firstNameValue = useSelector((state) => state.utilities[`firstNameMember-${card.town_hall_staff_id}`]);
+  const roleValue = useSelector((state) => state.utilities[`roleMember-${card.town_hall_staff_id}`]);
+  const photoValue = useSelector((state) => state.utilities[`photoMember-${card.town_hall_staff_id}`]);
 
   /** Confirm component state to delete a card member */
   const [confirm, setConfirm] = useState(false);
@@ -47,14 +47,14 @@ function CardModel({ ...card }) {
    *  @toggleEditingMember open modal corresponding at id member staff
    */
   const handleClick = () => {
-    dispatch(toggleEditingMember(`isOpenModalMember-${card.id_personnel_mairie}`));
+    dispatch(toggleEditingMember(`isOpenModalMember-${card.town_hall_staff_id}`));
   };
 
   /** Click delete button
    * @deleteCouncilMembers delete request to API
    */
   const confirmDeleteClick = (event) => {
-    const id = event.target.closest('.dimmable').querySelector(`.card-${card.id_personnel_mairie}`).getAttribute('name');
+    const id = event.target.closest('.dimmable').querySelector(`.card-${card.town_hall_staff_id}`).getAttribute('name');
     dispatch(deleteCouncilMembers(id));
   };
 
@@ -64,8 +64,8 @@ function CardModel({ ...card }) {
    */
   const handleSubmit = (event) => {
     event.preventDefault();
-    const id = event.target.closest('.dimmable').querySelector(`.card-${card.id_personnel_mairie}`).getAttribute('name');
-    dispatch(toggleEditingMember(`isOpenModalMember-${card.id_personnel_mairie}`));
+    const id = event.target.closest('.dimmable').querySelector(`.card-${card.town_hall_staff_id}`).getAttribute('name');
+    dispatch(toggleEditingMember(`isOpenModalMember-${card.town_hall_staff_id}`));
     dispatch(patchCouncilMembers(photoValue, firstNameValue, lastNameValue, roleValue, id));
   };
 
@@ -77,15 +77,16 @@ function CardModel({ ...card }) {
    * @createEditingMemberPhoto create a dynamic state value for one member for controlled field
    */
   useEffect(() => {
-    dispatch(createEditingMember(`isOpenModalMember-${card.id_personnel_mairie}`));
-    dispatch(createEditingMemberLastName(card.nom, `lastNameMember-${card.id_personnel_mairie}`));
-    dispatch(createEditingMemberFirstName(card.prenom, `firstNameMember-${card.id_personnel_mairie}`));
-    dispatch(createEditingMemberRole(card.role, `roleMember-${card.id_personnel_mairie}`));
-    dispatch(createEditingMemberPhoto(card.photo, `photoMember-${card.id_personnel_mairie}`));
+    dispatch(createEditingMember(`isOpenModalMember-${card.town_hall_staff_id}`));
+    dispatch(createEditingMemberLastName(card.lastname, `lastNameMember-${card.town_hall_staff_id}`));
+    dispatch(createEditingMemberFirstName(card.firstname, `firstNameMember-${card.town_hall_staff_id}`));
+    dispatch(createEditingMemberRole(card.role, `roleMember-${card.town_hall_staff_id}`));
+    dispatch(createEditingMemberPhoto(card.photo, `photoMember-${card.town_hall_staff_id}`));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Card className={`card-${card.id_personnel_mairie}`} name={card.id_personnel_mairie}>
+    <Card className={`card-${card.town_hall_staff_id}`} name={card.town_hall_staff_id}>
 
       {isOpenModal && (
       <Modal
@@ -103,7 +104,7 @@ function CardModel({ ...card }) {
               icon="picture"
               iconPosition="left"
               value={photoValue}
-              name={`photoMember-${card.id_personnel_mairie}`}
+              name={`photoMember-${card.town_hall_staff_id}`}
               placeholder="URL de la photo"
               title="Photo"
             />
@@ -112,7 +113,7 @@ function CardModel({ ...card }) {
               icon="user"
               iconPosition="left"
               value={firstNameValue}
-              name={`firstNameMember-${card.id_personnel_mairie}`}
+              name={`firstNameMember-${card.town_hall_staff_id}`}
               placeholder="Prénom du membre"
               title="Prénom"
             />
@@ -121,7 +122,7 @@ function CardModel({ ...card }) {
               icon="user"
               iconPosition="left"
               value={lastNameValue}
-              name={`lastNameMember-${card.id_personnel_mairie}`}
+              name={`lastNameMember-${card.town_hall_staff_id}`}
               placeholder="Nom du membre"
               title="Nom"
             />
@@ -130,7 +131,7 @@ function CardModel({ ...card }) {
               icon="book"
               iconPosition="left"
               value={roleValue}
-              name={`roleMember-${card.id_personnel_mairie}`}
+              name={`roleMember-${card.town_hall_staff_id}`}
               placeholder="Fonction du membre"
               title="Fonction"
             />
@@ -180,12 +181,12 @@ function CardModel({ ...card }) {
 }
 
 CardModel.propTypes = {
-  prenom: PropTypes.string.isRequired,
-  nom: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
   role: PropTypes.string.isRequired,
-  mairie_id: PropTypes.number.isRequired,
-  id_personnel_mairie: PropTypes.number.isRequired,
+  town_hall_id: PropTypes.number.isRequired,
+  town_hall_staff_id: PropTypes.number.isRequired,
 };
 
 export default CardModel;

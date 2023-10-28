@@ -23,6 +23,7 @@ const councilApi = (store) => (next) => (action) => {
           /** success of get request
            * @setCouncilMembers save member to state value
            */
+          console.log(response.data);
           store.dispatch(setCouncilMembers(response.data));
         })
         .catch(() => {

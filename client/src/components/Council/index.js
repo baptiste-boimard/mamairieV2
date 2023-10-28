@@ -27,13 +27,14 @@ function Council() {
    */
   useEffect(() => {
     dispatch(getCouncilMembers());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <section className="card-container">
       <h2>Présentation du conseil Municipal</h2>
       {councilMembers.map((card) => (
-        <CardModel key={card.id_personnel_mairie} imageName={card.photo} name={`${card.prenom} ${card.nom}`} role={card.role} {...card} />
+        <CardModel key={card.town_hall_staff_id} imageName={card.photo} name={`${card.firstname} ${card.lastname}`} role={card.role} {...card} />
       ))}
       {adminLogged && (
         <Card className="card">
