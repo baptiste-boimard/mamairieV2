@@ -12,7 +12,7 @@ import ReportAdmin from '../ReportAdmin';
 import InProgress from '../InProgress';
 import Council from '../Council';
 
-import { checkToken, login, setTownHallId } from '../../actions/login';
+import { login, setTownHallId } from '../../actions/login';
 import { toggleMenu } from '../../actions/menu';
 import NotFound from '../NotFound';
 
@@ -31,6 +31,7 @@ function App() {
    * @toggleMenu open menu component
    */
   useEffect(() => {
+    // allow to see the admin function on refresh if token is present
     const token = localStorage.getItem('accessToken');
     if (token !== null) {
       dispatch(login());
@@ -39,6 +40,7 @@ function App() {
     dispatch(setTownHallId(1));
     dispatch(toggleMenu(true));
     dispatch(getCouncilMembers());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
