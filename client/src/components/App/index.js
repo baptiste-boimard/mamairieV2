@@ -12,7 +12,7 @@ import ReportAdmin from '../ReportAdmin';
 import InProgress from '../InProgress';
 import Council from '../Council';
 
-import { checkToken, setTownHallId } from '../../actions/login';
+import { checkToken, login, setTownHallId } from '../../actions/login';
 import { toggleMenu } from '../../actions/menu';
 import NotFound from '../NotFound';
 
@@ -31,7 +31,11 @@ function App() {
    * @toggleMenu open menu component
    */
   useEffect(() => {
-    dispatch(checkToken());
+    const token = localStorage.getItem('accessToken');
+    if (token !== null) {
+      dispatch(login());
+    }
+    // dispatch(checkToken());
     dispatch(setTownHallId(1));
     dispatch(toggleMenu(true));
     dispatch(getCouncilMembers());

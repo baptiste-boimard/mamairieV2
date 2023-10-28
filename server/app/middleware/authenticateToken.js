@@ -16,9 +16,10 @@ const authenticateToken = (req, res, next) => {
 
   // if()
 
-  if (token === `null`) {
+  if (token === `null` && req.route.path === `/admin/me`) {
     const err = new Error(`Vous devez être connecté pour accéder à cette page.`);
     err.status = 401;
+    // res.send(`No Token`);
     next(err);
   }
   jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (error, user) => {

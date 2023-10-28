@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 import {
   SUBMIT_LOGIN,
@@ -79,24 +80,28 @@ const auth = (store) => (next) => (action) => {
           store.dispatch(setMessage(error.response.data.error.message, false));
         });
       break;
-    case CHECK_TOKEN:
-      // store.dispatch(eraseReportingFields());
-      store.dispatch(setMessage('', false));
-      instance.get('/admin/me')
-        .then(() => {
-          store.dispatch(login());
-        })
-        .catch((error) => {
-          store.dispatch(setLogout());
-          // Delete token if one already exists
-          if (localStorage.getItem('accessToken') !== 'null') {
-            localStorage.removeItem('accessToken');
-          }
-          // store.dispatch(setMessage(error.response.data.error.message, false));
+      // case CHECK_TOKEN:
+      //   // store.dispatch(eraseReportingFields());
+      //   store.dispatch(setMessage('', false));
+      //   instance.get('/admin/me')
+      //     .then((response) => {
+      //       // const navigate = useNavigate();
+      //       // if (response.data === 'No Token') {
+      //       //   navigate('/');
+      //       // }
+      //       store.dispatch(login());
+      //     })
+      //     .catch((error) => {
+      //       store.dispatch(setLogout());
+      //       // Delete token if one already exists
+      //       if (localStorage.getItem('accessToken') !== 'null') {
+      //         localStorage.removeItem('accessToken');
+      //       }
+      //       // store.dispatch(setMessage(error.response.data.error.message, false));
 
-          // Ouverture d'une modal annoncant erreur de refresh => connexion à nouveau
-        });
-      break;
+    //       // Ouverture d'une modal annoncant erreur de refresh => connexion à nouveau
+    //     });
+    //   break;
     case LOGOUT: {
       /** On logout
        * @delete delete token from intance and localstorage

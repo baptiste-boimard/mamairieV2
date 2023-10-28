@@ -94,11 +94,11 @@ const adminController = {
       next(err);
     }
   },
-  checkToken(req, res) {
-    res.send(`Refresh OK`);
-    // const decodedToken = jwt.decode(req.body.token, process.env.ACCES_TOKEN_SECRET, { algorithms: [`HS256`] });
-    // res.json(decodedToken);
-  },
+  // checkToken(req, res) {
+  //   res.send(`Refresh OK`);
+  //   // const decodedToken = jwt.decode(req.body.token, process.env.ACCES_TOKEN_SECRET, { algorithms: [`HS256`] });
+  //   // res.json(decodedToken);
+  // },
 };
 
 module.exports = adminController;
