@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { Dropdown, Loader, Message } from 'semantic-ui-react';
@@ -17,8 +17,6 @@ import './style.scss';
 
 function Reports() {
   const dispatch = useDispatch();
-
-  // const { logged } = useSelector((state) => state.login);
 
   const {
     isReporting,
@@ -47,11 +45,12 @@ function Reports() {
    */
   useEffect(() => {
     if (window.location.pathname.includes('admin') && logged) {
-      dispatch(getAdminReports());
+      console.log('demande admion');
+      // dispatch(getAdminReports());
     } else {
+      console.log('demande repost');
       dispatch(getReports());
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** list of month in french fot moment */

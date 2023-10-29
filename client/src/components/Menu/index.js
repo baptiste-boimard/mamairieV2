@@ -30,6 +30,7 @@ function Menu() {
   const hideMenu = () => {
     dispatch(toggleMenu(false));
     dispatch(toggleReporting(false));
+    dispatch(setMessage(''));
   };
 
   /** Clicking menu button

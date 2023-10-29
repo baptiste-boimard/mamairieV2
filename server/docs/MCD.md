@@ -1,7 +1,7 @@
 # SCHEMA MCD MODOCO
 
 DEFINIR, 11 ARTICLE, 0N ARTICLE_CATEGORY
-ARTICLE: id_article, title, description, summary, image, author
+ARTICLE: id_article, title, description, summary, image, author, created_at
 :
 :
 :
@@ -15,7 +15,7 @@ POSSEDER, 11 ADMIN, 0N TOWN_HALL
 :
 
 CATEGORISER, 11 REPORTING, 0N REPORTING_CATEGORY
-REPORTING: reporting_id, title, email, phonenumber, firstname, lastname, description, ip, image, admin_text, admin_image
+REPORTING: reporting_id, title, email, phonenumber, firstname, lastname, description, ip, image, admin_text, admin_image, created_at
 EMMETRE, 11 REPORTING, 0N TOWN_HALL
 TOWN_HALL: town_hall_id, name, address, phonenumber, hourly, email, insee
 RECENSER, 0N TOWN_HALL, 11 SERVICE

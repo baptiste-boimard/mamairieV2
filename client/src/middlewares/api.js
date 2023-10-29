@@ -25,7 +25,6 @@ const api = (store) => (next) => (action) => {
           /** success of get request
            * @saveReports save reports to state value
            */
-          console.log(response.data);
           store.dispatch(saveReports(response.data));
         })
         .catch(() => {
@@ -44,7 +43,7 @@ const api = (store) => (next) => (action) => {
     case SUBMIT_REPORTING:
       instance.post(`/reporting/${townHallId}`, {
         reporting_category: action.reporting_category,
-        title: action.title,
+        title: action.reporting_title,
         description: action.reporting_description,
         email: action.reporting_email,
         firstname: action.reporting_firstName,
@@ -68,7 +67,6 @@ const api = (store) => (next) => (action) => {
         })
         .finally(() => {
           store.dispatch(getReports());
-          store.dispatch(getAdminReports());
         });
       break;
     default:

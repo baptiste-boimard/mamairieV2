@@ -1,6 +1,6 @@
 # MLD 
 
-ARTICLE(article_id, title, description, summary, image, author, admin_id, article_category_id, town_hall_id)
+ARTICLE(article_id, title, description, summary, image, author, admin_id, article_category_id, town_hall_id, created_at)
 
 ARTICLE_CATEGORY(article_category_id, name, hex_color)
 
@@ -12,7 +12,7 @@ TOWN_HAL_STAFF(town_hall_staff_id, firstname, lastname, role, photo, town_hall_i
 
 SERVICE(service_id, name, phonenumber, address, email, image, town_hall_id)
 
-REPORTING(reporting_id, tite, email, phonenumber, firstname, lastname, description, ip, image, admin_text, admin_image, reporting_category_id, reporting_status_id, town_hall_id)
+REPORTING(reporting_id, tite, email, phonenumber, firstname, lastname, description, ip, image, admin_text, admin_image, reporting_category_id, reporting_status_id, town_hall_id, created_at)
 
 REPORTING_STATUS(reporting_status_id, name)
 

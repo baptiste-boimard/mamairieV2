@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router';
 
 import {
   SUBMIT_LOGIN,
@@ -10,8 +9,8 @@ import {
   LOGOUT,
   setLogout,
   setTownHallId,
-  CHECK_TOKEN,
 } from '../actions/login';
+
 import { redirect, setMessage, eraseEmailPasswordState } from '../actions/utilities';
 
 /** Instance of axios with options */
@@ -62,7 +61,6 @@ const auth = (store) => (next) => (action) => {
           store.dispatch(setTownHallId(response.data.townHallId));
           store.dispatch(redirect('/admin'));
           store.dispatch(eraseEmailPasswordState());
-          store.dispatch(setMessage('', ''));
 
           // Delete token if one already exists
           // if (localStorage.getItem('accessToken') !== 'null') {
@@ -114,7 +112,7 @@ const auth = (store) => (next) => (action) => {
        * @setMessage set a success message
        */
       delete instance.defaults.headers.common.Authorization;
-
+      // const navigate = useNavigate();
       // console.log('avant', instance.defaults.headers.common.Authorization);
       // instance.defaults.headers.common.Authorization = '';
       // console.log('arpes', instance.defaults.headers.common.Authorization);
@@ -122,6 +120,7 @@ const auth = (store) => (next) => (action) => {
 
       store.dispatch(setLogout());
       store.dispatch(setMessage('Vous êtes déconnecté', true));
+      // navigate('/');
       break;
     }
     default:

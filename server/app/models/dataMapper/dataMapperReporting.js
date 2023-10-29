@@ -58,6 +58,7 @@ const dataMapperReporting = {
                   FROM reporting_status) as stat
                   ON r.reporting_status_id = stat.reporting_status_id
                 WHERE r.town_hall_id = $1
+                AND NOT reporting_status LIKE '%validé'
                 ORDER BY CASE
                 WHEN reporting_status = $2 THEN 1
                 WHEN reporting_status = $3 THEN 2

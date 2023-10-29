@@ -33,32 +33,32 @@ export const initialState = {
     },
     {
       // key: 'Voirie',
-      text: (<Icon className="dropdown-icon" name="road"> Voirie</Icon>),
+      text: (<Icon className="dropdown-icon" name="road">Voirie</Icon>),
       value: 'Voirie',
     },
     {
       // key: 'Eclairage public',
-      text: (<Icon className="dropdown-icon" name="lightbulb"> Eclairage public</Icon>),
+      text: (<Icon className="dropdown-icon" name="lightbulb">Eclairage public</Icon>),
       value: 'Eclairage public',
     },
     {
       // key: 'Voisinage',
-      text: (<Icon className="dropdown-icon" name="users"> Voisinage</Icon>),
+      text: (<Icon className="dropdown-icon" name="users">Voisinage</Icon>),
       value: 'Voisinage',
     },
     {
       // key: 'Ramassage des déchets',
-      text: (<Icon className="dropdown-icon" name="trash"> Ramassage des déchets</Icon>),
+      text: (<Icon className="dropdown-icon" name="trash">Ramassage des déchets</Icon>),
       value: 'Ramassage des déchets',
     },
     {
       // key: 'Objets trouvé/perdu',
-      text: (<Icon className="dropdown-icon" name="key"> Objet trouvé ou perdu</Icon>),
+      text: (<Icon className="dropdown-icon" name="key">Objet trouvé ou perdu</Icon>),
       value: 'Objet trouvé ou perdu',
     },
     {
       // key: 'Autre',
-      text: (<Icon className="dropdown-icon" name="bullhorn"> Autre</Icon>),
+      text: (<Icon className="dropdown-icon" name="bullhorn">Autre</Icon>),
       value: 'Autre',
     },
   ],
@@ -236,6 +236,13 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         activeIndex: -1,
       };
+    // /** Erase all reports */
+    // case ERASE_REPORTS:
+    //   return {
+    //     ...state,
+    //     reportsList: [],
+    //     reportsAdminList: [],
+    //   };
     default:
       return state;
   }

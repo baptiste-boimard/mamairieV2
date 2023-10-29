@@ -1,10 +1,16 @@
 const client = require(`../models/dbClient`);
 const stringSimilarity = require(`string-similarity`);
 const leoProfanity = require(`leo-profanity`);
-const frenchBadwordsList = require(`french-badwords-list`);
+// const frenchBadwordsList = require(`./array`);
+// const BadWords = require(`bad-words`);
+// const frenchBadwordsList = new BadWords({ placeHolder: `x`, emptyList: true });
+// const newFrenchBadwordsList = require(`./array`);
+// frenchBadwordsList.addWords(...newFrenchBadwordsList.array);
+
+const frenchBadwordsList = require(`./frenchBadWordsList`);
 
 leoProfanity.clearList();
-leoProfanity.add(frenchBadwordsList.array);
+leoProfanity.add(frenchBadwordsList);
 
 /**
  * object contains methods to filter reports
