@@ -11,7 +11,7 @@ const { Pool } = require(`pg`);
  */
 
 const client = new Pool({
-  connectionString: `postgres://mamairieV2:mamairieV2@localhost:5432/mamairieV2`,
+  connectionString: `postgres://mamairieV2:mamairieV2@51.75.133.155:5432/mamairieV2`,
   ssl: {
     rejectUnauthorized: false,
   },
