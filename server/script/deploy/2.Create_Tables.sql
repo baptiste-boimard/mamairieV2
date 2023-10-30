@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS public.reporting (
   "admin_text" TEXT,
   "admin_image" TEXT,
   "reporting_category_id" INT NOT NULL,
-  "reporting_status_id" INT NOT NULL SET DEFAULT 1,
+  "reporting_status_id" INT NOT NULL DEFAULT 1,
   "town_hall_id" INT NOT NULL,
   "created_at" TIMESTAMPTZ DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ,
