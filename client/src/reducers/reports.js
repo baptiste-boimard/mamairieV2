@@ -236,13 +236,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         activeIndex: -1,
       };
-    // /** Erase all reports */
-    // case ERASE_REPORTS:
-    //   return {
-    //     ...state,
-    //     reportsList: [],
-    //     reportsAdminList: [],
-    //   };
     default:
       return state;
   }

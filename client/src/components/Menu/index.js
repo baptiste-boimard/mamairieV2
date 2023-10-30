@@ -1,8 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
-import { useEffect, useRef } from 'react';
-
 import { toggleMenu } from '../../actions/menu';
 import { setMessage } from '../../actions/utilities';
 import { resetErrorReporting } from '../../actions/reporting';
@@ -14,14 +12,6 @@ function Menu() {
   const dispatch = useDispatch();
 
   const { isOpen } = useSelector((state) => state.menu);
-
-  // const messagesRef = useRef();
-
-  // const hiddenElementRef = useRef();
-
-  // useEffect(() => {
-  //   hiddenElementRef.current.scrollIntoView({ behavior: 'smooth' });
-  // }, [isOpen]);
 
   /** Clicking one button of menu
    * @toggleMenu close menu
@@ -47,7 +37,6 @@ function Menu() {
   };
 
   return (
-  // <div className={isOpen ? 'test test--open' : 'test'}>
     <div className="menu">
       <div className="menu-content">
         <Link to="/">
@@ -108,7 +97,6 @@ function Menu() {
         </nav>
       )}
     </div>
-  // </div>
   );
 }
 

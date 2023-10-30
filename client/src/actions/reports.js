@@ -120,9 +120,3 @@ export const ERASE_VALUE_ACTIVE_INDEX = 'ERASE_VALUE_ACTIVE_INDEX';
 export const eraseValueActiveIndex = () => ({
   type: ERASE_VALUE_ACTIVE_INDEX,
 });
-
-// /** Erase all reports */
-// export const ERASE_REPORTS = 'ERASE_REPORTS';
-// export const eraseReports = () => ({
-//   type: ERASE_REPORTS,
-// });

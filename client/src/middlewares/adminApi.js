@@ -22,9 +22,6 @@ const adminApi = (store) => (next) => (action) => {
   const { townHallId } = store.getState().login;
   switch (action.type) {
     case GET_ADMIN_REPORTS:
-      // console.log('get admin reports', instance.headers.Authorization);
-      // console.log('get admin reports', instance.defaults.headers.common.Authorization);
-      store.dispatch(loading(true));
       instance.get(`/admin/reporting/${townHallId}`)
         .then((response) => {
           /** success of get request
@@ -37,7 +34,6 @@ const adminApi = (store) => (next) => (action) => {
           /** error on request
            * @setMessage set a message error
            */
-          // console.log(error);
           store.dispatch(setMessage('coucou', error.response.data.error.message, false));
         })
         .finally(() => {

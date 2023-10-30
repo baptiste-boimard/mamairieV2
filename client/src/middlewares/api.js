@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// import { toggleMenu } from '../actions/menu';
 import { eraseReportingFields, SUBMIT_REPORTING } from '../actions/reporting';
 import {
   getReports,
@@ -24,7 +23,6 @@ const api = (store) => (next) => (action) => {
           /** success of get request
            * @saveReports save reports to state value
            */
-          console.log(response.data);
           store.dispatch(saveReports(response.data));
         })
         .catch(() => {

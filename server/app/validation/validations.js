@@ -47,7 +47,7 @@ const validationModule = {
         error.message === `"admin_text" length must be at least 10 characters long`
       ) {
         const err = new Error(
-          `Le texte de administrateur doit contenir une réponse d'au moins 10 caractères.`,
+          `Le texte de l'administrateur doit contenir une réponse d'au moins 10 caractères.`,
         );
         err.status = 400;
         next(err);

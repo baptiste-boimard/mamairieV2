@@ -46,34 +46,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.name]: !state[action.name],
       };
-
-      // /** Create a specific pair key/value to council reducer to change one member lastname */
-      // case CREATE_EDITING_MEMBER_LASTNAME:
-      //   return {
-      //     ...state,
-      //     [action.key]: action.value,
-      //   };
-
-      // /** Create a specific pair key/value to council reducer to change one member firstname */
-      // case CREATE_EDITING_MEMBER_FIRSTNAME:
-      //   return {
-      //     ...state,
-      //     [action.key]: action.value,
-      //   };
-
-      // /** Create a specific pair key/value to council reducer to change one member role */
-      // case CREATE_EDITING_MEMBER_ROLE:
-      //   return {
-      //     ...state,
-      //     [action.key]: action.value,
-      //   };
-
-    // /** Create a specific pair key/value to council reducer to change one member photo */
-    // case CREATE_EDITING_MEMBER_PHOTO:
-    //   return {
-    //     ...state,
-    //     [action.key]: action.value,
-    //   };
     default:
       return state;
   }

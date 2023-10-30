@@ -659,7 +659,7 @@ router.get(
  *            HTTP/1.1 500
  *            {
  *              "error": {
- *               "message": "Vous avez deja poster 3 fois aujourd'hui."
+ *               "message": "Vous avez déjà posté 3 fois aujourd'hui."
  *              }
  *            }
  * @apiErrorExample {json} Error-Response:
@@ -673,7 +673,7 @@ router.get(
  *            HTTP/1.1 500
  *            {
  *              "error": {
- *               "message": "Le contenu du signalement est très similaire a un autre signalement."
+ *               "message": "Le contenu du signalement est très similaire à un autre signalement."
  *              }
  *            }
  */
@@ -697,8 +697,8 @@ router.post(
  *              [
  *                {
  *                  "town_hall_staff_id": 1,
- *                  "last_name": "Jean",
- *                  "first_name": "Jean",
+ *                  "lastname": "Jean",
+ *                  "firstname": "Jean",
  *                  "role": "Maire",
  *                  "photo": "",
  *                  "town_hall_id": 1,
@@ -710,7 +710,7 @@ router.post(
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Impossible de récupèrer les Conseillers !"
+ *                "message": "Impossible de récupèrer les conseillers !"
  *              }
  *            }
  */
@@ -741,14 +741,14 @@ router.get(
  *            HTTP/1.1 500
  *            {
  *              "error": {
- *               "message": "Le Role est requis !"
+ *               "message": "Le role est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *              "error": {
- *               "message": "Le Nom de famille est requis !"
+ *               "message": "Le nom de famille est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
@@ -762,7 +762,7 @@ router.get(
  *            HTTP/1.1 500
  *            {
  *              "error": {
- *               "message": "Le Prénom est requis !"
+ *               "message": "Le prénom est requis !"
  *              }
  *            }
  */
@@ -783,7 +783,7 @@ router.post(
  *@apiSuccessExample Success-response:
  *            HTTP/1.1 200 OK
  *                {
- *                 "Le Membre à bien été supprimer !"
+ *                 "Le membre à bien été supprimer !"
  *                }
  * @apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
@@ -823,21 +823,21 @@ router.delete(
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le Prénom est requis !"
+ *                "message": "Le prénom est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le Nom de famille est requis !"
+ *                "message": "Le nom de famille est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le Role est requis !"
+ *                "message": "Le role est requis !"
  *              }
  *            }
  * @apiErrorExample {json} Error-Response:
@@ -854,11 +854,5 @@ router.patch(
   validateUpdateCouncilMember(schemaUpdateCouncilMember),
   routerWrapper(adminControllerCouncil.modifyMemberCouncil),
 );
-// // TODO doc
-// router.get(
-//   `/admin/me`,
-//   authenticateToken,
-//   routerWrapper(adminController.checkToken),
-// );
 
 module.exports = router;

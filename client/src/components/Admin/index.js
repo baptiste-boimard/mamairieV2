@@ -27,7 +27,6 @@ function Admin() {
             <div className="admin-content">
               <div className="admin-button">
                 <h3>Conseil municipal</h3>
-                {/* <Button className="create" icon="plus" content="Créer" /> */}
                 <Link to="/admin/council/1">
                   <Button className="editCouncil" icon="edit" content="Editer" />
                 </Link>
@@ -80,7 +79,6 @@ function Admin() {
                   content="Service bientôt disponible"
                 />
                 <Button className="create" icon="plus" content="Ajouter plan d'accès" />
-                {/* <Button className="edit" icon="edit" content="Editer les horaires" /> */}
               </div>
             </div>
             <div className="admin-content">
@@ -111,8 +109,6 @@ function Admin() {
                     type="text"
                     className="admin-form-input"
                     placeholder="URL twitter"
-                    // value={facebook}
-                    // name={facebook}
                     title="twitter"
                     icon="twitter"
                   />
