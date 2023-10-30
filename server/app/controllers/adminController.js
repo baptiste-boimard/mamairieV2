@@ -9,11 +9,13 @@ const { dataMapperAdmin } = require(`../models/dataMapper/index`);
  * @namespace adminController
  */
 const adminController = {
+
   /** The method allows you to create an administrator in the database
-   * @menberof adminController
+   * @memberof adminController
    * @method signup
    * @param {Object} req.body
    * @param {Object} res
+   * @param {Function} next
    * @returns void
    */
   async signup(req, res, next) {
@@ -30,12 +32,12 @@ const adminController = {
     if (existingUser) {
       if (existingUser.pseudo === req.body.pseudo) {
         const err = new Error(
-          `Le pseudo est déjà prit merci d'en saisir un autre.`,
+          `Le pseudo est déjà prit, merci d'en saisir un autre.`,
         );
         next(err);
       } else if (existingUser.email === req.body.email) {
         const err = new Error(
-          `Adresse email est déjà prise merci d'en saisir une autre.`,
+          `Cette adresse email est déjà prise, merci d'en saisir une autre.`,
         );
         next(err);
       }
@@ -51,24 +53,25 @@ const adminController = {
         .status(200)
         .send(`Votre compte a bien été créé, vous pouvez vous connecter.`);
       if (!userSignup.rowCount) {
-        const err = new Error(`La creation de votre compte a échoué vérifier vos données.`);
+        const err = new Error(`La creation de votre compte a échoué, vérifiez vos données.`);
         next(err);
       }
     }
   },
   /**
    * The method allows you to log in as an administrator
-   * @menberof adminController
+   * @memberof adminController
    * @method signup
    * @param {Object} req.body
    * @param {Object} res
-   * @returns {Object} Return token and town_hall_id
+   * @param {Function} next
+   * @returns {Object} Return token, town_hall_id and admin_id
    */
   async login(req, res, next) {
     const existingUser = await dataMapperAdmin.getOneAdmin(req.body.email);
 
     if (!existingUser) {
-      const err = new Error(`Impossible de récupérer l'administrateur en base.`);
+      const err = new Error(`Impossible de récupérer cet administrateur.`);
       next(err);
     }
     const match = await bcrypt.compare(
@@ -90,15 +93,10 @@ const adminController = {
 
       res.json({ accessToken, townHallId, adminId });
     } else {
-      const err = new Error(`La connexion a échoué vérifier vos données.`);
+      const err = new Error(`La connexion a échouée, vérifier vos données.`);
       next(err);
     }
   },
-  // checkToken(req, res) {
-  //   res.send(`Refresh OK`);
-  //   // const decodedToken = jwt.decode(req.body.token, process.env.ACCES_TOKEN_SECRET, { algorithms: [`HS256`] });
-  //   // res.json(decodedToken);
-  // },
 };
 
 module.exports = adminController;

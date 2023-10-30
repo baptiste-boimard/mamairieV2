@@ -7,7 +7,7 @@ const jwt = require(`jsonwebtoken`);
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
- * @returns {String} Returns administrator id
+ * @returns {Object} Returns error if token is not present or not valid
  */
 
 const authenticateToken = (req, res, next) => {

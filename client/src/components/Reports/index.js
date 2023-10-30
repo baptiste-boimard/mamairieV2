@@ -7,7 +7,6 @@ import { Dropdown, Loader, Message } from 'semantic-ui-react';
 import {
   changeReportsFilter,
   getAdminReports, getReports,
-  // updateFilteredReports,
 } from '../../actions/reports';
 import Reporting from '../Reporting';
 import Report from './Report';
@@ -45,12 +44,11 @@ function Reports() {
    */
   useEffect(() => {
     if (window.location.pathname.includes('admin') && logged) {
-      console.log('demande admion');
-      // dispatch(getAdminReports());
+      dispatch(getAdminReports());
     } else {
-      console.log('demande repost');
       dispatch(getReports());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** list of month in french fot moment */

@@ -61,7 +61,7 @@ const router = express.Router();
  *              "error": {
  *               "message": "Le mot de passe doit contenir une majuscule un caractère
  *                           spécial est au minimum 8 caractères et maximum 15
- *                           caractères les chiffres sont autorisés."
+ *                           caractères, les chiffres sont autorisés."
  *              }
  *            }
  * @apiErrorExample {json} Error-Response:
@@ -82,7 +82,7 @@ const router = express.Router();
  *            HTTP/1.1 500
  *            {
  *              "error": {
- *               "message": "Adresse email est déjà prise merci d'en saisir une autre."
+ *               "message": "Adresse email est déjà prise, merci d'en saisir une autre."
  *              }
  *            }
  */
@@ -116,7 +116,7 @@ router.post(
  *            HTTP/1.1 500
  *            {
  *              "error": {
- *               "message": "La connexion a échoué vérifier vos données."
+ *               "message": "La connexion a échoué, vérifier vos données."
  *              }
  *            }
  * @apiErrorExample {json} Error-Response:
@@ -144,13 +144,13 @@ router.post(`/login`, routerWrapper(adminController.login));
  *                   "title": "Chien errant",
  *                   "email": "alain.proviste.@gmail.com",
  *                   "phonenumber": "0688789531",
- *                   "first_name": "Alain",
- *                   "last_name": "Proviste",
- *                   "user_image": null,
- *                   "user_text": "Bonjour, J'ai vu un chien errant 6 rue du
+ *                   "firstname": "Alain",
+ *                   "lastname": "Proviste",
+ *                   "image": null,
+ *                   "description": "Bonjour, J'ai vu un chien errant 6 rue du
  *                                  champ des loups, il etais noir avec des tache blanche de taille
  *                                  moyenne avec un petit museaux.",
- *                   "user_ip": null,
+ *                   "ip": null,
  *                   "admin_text": null,
  *                   "admin_image": null,
  *                   "reporting_category": "Animaux",
@@ -199,13 +199,13 @@ router.get(
  *                   "title": "Chien errant",
  *                   "email": "alain.proviste.@gmail.com",
  *                   "phonenumber": "0688789531",
- *                   "first_name": "Alain",
- *                   "last_name": "Proviste",
- *                   "user_image": null,
- *                   "user_text": "Bonjour, J'ai vu un chien errant 6 rue du
+ *                   "firstname": "Alain",
+ *                   "lastname": "Proviste",
+ *                   "image": null,
+ *                   "description": "Bonjour, J'ai vu un chien errant 6 rue du
  *                                  champ des loups, il etais noir avec des tache blanche de taille
  *                                  moyenne avec un petit museaux.",
- *                   "user_ip": null,
+ *                   "ip": null,
  *                   "admin_text": null,
  *                   "admin_image": null,
  *                   "reporting_category": "Animaux",
@@ -288,7 +288,7 @@ router.delete(
  *@apiSuccessExample Success-yarnresponse:
  *            HTTP/1.1 200 OK
  *              {
- *                La mise à jour est bien passée.
+ *                La mise à jour s'est bien passée.
  *              }
  * @apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
@@ -339,14 +339,13 @@ router.patch(
  *                                    Faites pas votre mijoré! Moi je me fais traiter de gonzesse
  *                                    jen fais pas tout un cake! Ben attendez,
  *                                    je vais vous rendre la vôtre. Ptite pucelle!",
- *                    "summarize": "Pas foutu de savoir son nom! Vous savez
+ *                    "summary": "Pas foutu de savoir son nom! Vous savez
  *                                  cest quand de même pas grave de
  *                                  pas savoir faire des tartes!
  *                                  Ben attendez, je vais vous rendre la vôtre.",
  *                    "image": null,
  *                    "author": "AdminMaMairie",
  *                    "article_categorie": "Fête",
- *                    "article_color": "Red",
  *                    "town_hall_id": 1,
  *                    "created_at": "2022-05-19T16:24:32.276Z",
  *                    "updated_at": null
@@ -393,14 +392,13 @@ router.get(
  *                                    Faites pas votre mijoré! Moi je me fais traiter de gonzesse
  *                                    jen fais pas tout un cake! Ben attendez,
  *                                    je vais vous rendre la vôtre. Ptite pucelle!",
- *                    "summarize": "Pas foutu de savoir son nom! Vous savez
+ *                    "summary": "Pas foutu de savoir son nom! Vous savez
  *                                  cest quand de même pas grave de
  *                                  pas savoir faire des tartes!
  *                                  Ben attendez, je vais vous rendre la vôtre.",
  *                    "image": null,
  *                    "author": "AdminMaMairie",
  *                    "article_categorie": "Fête",
- *                    "article_color": "Red",
  *                    "town_hall_id": 1,
  *                    "created_at": "2022-05-19T16:24:32.276Z",
  *                    "updated_at": null
@@ -439,7 +437,7 @@ router.get(
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le post de l'article n'est pas possible !"
+ *                "message": "Publier l'article n'est pas possible !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
@@ -453,28 +451,28 @@ router.get(
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le champ titre est requis ! is required"
+ *                "message": "Le champ titre est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le champ description est requis !" is required"
+ *                "message": "Le champ description est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le champ resummé est requis !" is required"
+ *                "message": "Le champ resummé est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le champ author est requis !" is required"
+ *                "message": "Le champ author est requis !"
  *              }
  *            }
  *
@@ -502,7 +500,7 @@ router.post(
  *@apiSuccessExample {json} Success-response:
  *                   HTTP/1.1 200
  *                  {
- *                    "L'article est bien supprimer !"
+ *                    "L'article est bien supprimé !"
  *                   }
  * @apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
@@ -534,7 +532,7 @@ router.delete(
  *@apiSuccessExample {json} Success-response:
  *                   HTTP/1.1 200
  *                  {
- *                    "La mise à jour est bien passée."
+ *                    "La mise à jour s'est bien passée."
  *                   }
  * @apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
@@ -554,28 +552,28 @@ router.delete(
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le champ titre est requis ! is required"
+ *                "message": "Le champ titre est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le champ description est requis !" is required"
+ *                "message": "Le champ description est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le champ resummé est requis !" is required"
+ *                "message": "Le champ resummé est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
  *            HTTP/1.1 500
  *            {
  *             "error" : {
- *                "message": "Le champ author est requis !" is required"
+ *                "message": "Le champ author est requis !"
  *              }
  *            }
  *@apiErrorExample {json} Error-Response:
@@ -611,13 +609,13 @@ router.patch(
  *                   "title": "Chien errant",
  *                   "email": "alain.proviste.@gmail.com",
  *                   "phonenumber": "0688789531",
- *                   "first_name": "Alain",
- *                   "last_name": "Proviste",
- *                   "user_image": null,
- *                   "user_text": "Bonjour, J'ai vu un chien errant 6 rue du
+ *                   "firstname": "Alain",
+ *                   "lastname": "Proviste",
+ *                   "image": null,
+ *                   "description": "Bonjour, J'ai vu un chien errant 6 rue du
  *                                  champ des loups, il etais noir avec des tache blanche de taille
  *                                  moyenne avec un petit museaux.",
- *                   "user_ip": null,
+ *                   "ip": null,
  *                   "admin_text": null,
  *                   "admin_image": null,
  *                   "reporting_category": "Animaux",

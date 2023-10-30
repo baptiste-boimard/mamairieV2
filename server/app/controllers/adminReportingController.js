@@ -1,5 +1,5 @@
 const { dataMapperReporting } = require(`../models/dataMapper/index`);
-// const debug = require(`debug`)(`ADMINREPORT`);
+
 /**
  * @type {object}
  * @export adminReportingController
@@ -7,12 +7,13 @@ const { dataMapperReporting } = require(`../models/dataMapper/index`);
  */
 const adminReportingController = {
   /**
-   * The method returns all administrator reports
-   * @menberof adminReportingController
+   * The method returns all reports for administrator
+   * @memberof adminReportingController
    * @method allReporting
    * @param {Object} req
    * @param {Object} res
-   * @returns Return all reports Administrator
+   * @param {Function} next
+   * @returns {Array} Return all reports for Administrator
    */
   async allReporting(req, res, next) {
     if (parseInt(req.params.town_hall_id, 10) !== req.admin.town_hall_id) {
@@ -34,14 +35,14 @@ const adminReportingController = {
   },
   /**
    * The method returns all visitor reports
-   * @menberof adminReportingController
+   * @memberof adminReportingController
    * @method allReportingVisitor
    * @param {Object} req
    * @param {Object} res
-   * @returns Return all reports visitor
+   * @param {Function} next
+   * @returns {Array} Return all reports visitor
    */
   async allReportingVisitor(req, res, next) {
-    // eslint-disable-next-line max-len
     const reportings = await dataMapperReporting.getAllReportVisitor(
       parseInt(req.params.town_hall_id, 10),
     );
@@ -56,11 +57,12 @@ const adminReportingController = {
   },
   /**
    * The method returns one reports
-   * @menberof adminReportingController
+   * @memberof adminReportingController
    * @method oneReporting
    * @param {Object} req
    * @param {Object} res
-   * @returns Return one reports visitor
+   * @param {Function} next
+   * @returns {Object} Return one reports visitor
    */
   async oneReporting(req, res, next) {
     if (Number(req.params.town_hall_id) !== req.admin.town_hall_id) {
@@ -84,10 +86,11 @@ const adminReportingController = {
   },
   /**
    * The method allows you to delete a report as administrator
-   * @menberof adminReportingController
+   * @memberof adminReportingController
    * @method deleteReporting
    * @param {Object} req
    * @param {Object} res
+   * @param {Function} next
    * @returns void
    */
   async deleteReporting(req, res, next) {
@@ -113,10 +116,11 @@ const adminReportingController = {
   },
   /**
    * The method allows you to modify a report as administrator
-   * @menberof adminReportingController
+   * @memberof adminReportingController
    * @method modifyReporting
    * @param {Object} req
    * @param {Object} res
+   * @param {Function} next
    * @returns void
    */
   async modifyReporting(req, res, next) {
@@ -127,11 +131,10 @@ const adminReportingController = {
       err.status = 401;
       next(err);
     }
-    const getStatus = await dataMapperReporting.getOneReportingStatus(req.body.reporting_statut);
     const getReport = await dataMapperReporting.getOneReport(req.params.reporting_id);
     const values = {
       admin_text: req.body.admin_text,
-      reporting_statut: getStatus.reporting_status_id,
+      reporting_statut: req.body.reporting_statut,
       reporting_id: req.params.reporting_id,
 
     };
@@ -147,14 +150,14 @@ const adminReportingController = {
   },
   /**
    * The method allows you to post a report as a visitor
-   * @menberof adminReportingController
+   * @memberof adminReportingController
    * @method postReporting
    * @param {Object} req
    * @param {Object} res
+   * @param {Function} next
    * @returns void
    */
   async postReporting(req, res, next) {
-    const reportingCategory = await dataMapperReporting.getOneReportingCategory(req.body.reporting_category);
     const values = {
       title: req.body.title,
       email: req.body.email,
@@ -164,15 +167,15 @@ const adminReportingController = {
       description: req.body.description,
       ip: req.headers[`x-forwarded-for`]?.split(`,`).shift() || req.socket?.remoteAddress,
       image: req.body.user_image,
-      reporting_category_id: reportingCategory.reporting_category_id,
       town_hall_id: req.params.town_hall_id,
+      reporting_category: req.body.reporting_category,
     };
     const report = await dataMapperReporting.postReport(values);
     if (report.rowCount) {
-      res.status(200).send(`Le signalement ${req.body.title} de ${req.body.firstname} est effectué.`);
+      res.status(200).send(`Le signalement ${req.body.title} de ${req.body.firstname} ${req.body.lastname} est effectué.`);
     } else {
       const err = new Error(
-        `Impossible de poster votre signalement.`,
+        `Impossible de publier votre signalement.`,
       );
       next(err);
     }

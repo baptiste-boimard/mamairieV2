@@ -2,7 +2,7 @@ const debug = require(`debug`)(`HANDLEERROR`);
 
 /**
  * The object allows you to create
- * a customize error and send it back to the front end
+ * a customize error and send it to the front end
  * @type {Object}
  * @namespace handleError
  * @export handleError

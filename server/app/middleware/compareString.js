@@ -1,11 +1,6 @@
 const client = require(`../models/dbClient`);
 const stringSimilarity = require(`string-similarity`);
 const leoProfanity = require(`leo-profanity`);
-// const frenchBadwordsList = require(`./array`);
-// const BadWords = require(`bad-words`);
-// const frenchBadwordsList = new BadWords({ placeHolder: `x`, emptyList: true });
-// const newFrenchBadwordsList = require(`./array`);
-// frenchBadwordsList.addWords(...newFrenchBadwordsList.array);
 
 const frenchBadwordsList = require(`./frenchBadWordsList`);
 
@@ -20,7 +15,7 @@ leoProfanity.add(frenchBadwordsList);
  */
 const compareString = {
   /**
-   * la method permet de récupérer adresse ip
+   * Method allow to recover ip adress
    * @memberof compareString
    * @method getIp
    * @param {Object} req
@@ -31,8 +26,8 @@ const compareString = {
   || req.socket?.remoteAddress;
     return ip;
   },
-  /**
-   * Permet de savoir combien de fois l'ip a été utilisé auj pour poster un signalement
+
+  /** allow verify if the same ip has posted more 3 times a reporting
    * @memberof compareString
    * @method verifyIp
    * @param {String} ip
@@ -49,10 +44,9 @@ const compareString = {
     return Number(result.rows[0].count);
   },
   /**
-   * Permet de vérifier si le contenu du titre et de la description
-   * possède des similarité avec d'autres signalement d'auj
-   * Vérifie si un même ip à déjà posté plus de 3 fois auj
-   * Test si le titre et la description ne contient pas d'insulte
+   * allow verify if the title and desciption ahve similarity with previous daily reporting
+   * Verify if a same ip posted 3 times a reporting
+   * Test is title and description content bads words
    * @memberof compareString
    * @method verifyString
    * @param {Object} req
@@ -90,7 +84,7 @@ const compareString = {
       }
       const matches = stringSimilarity.findBestMatch(stringUser, AllUserTextString);
       if (matches.bestMatch.rating > 0.8) {
-        const err = new Error(`Le contenu du signalement est très similaire à un autre signalement`);
+        const err = new Error(`Le contenu du signalement est très similaire à un autre signalement d'aujourd'hui`);
         next(err);
       } else {
         next();

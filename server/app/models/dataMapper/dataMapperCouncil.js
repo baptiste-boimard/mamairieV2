@@ -8,7 +8,7 @@ const client = require(`../dbClient`);
 const dataMapperCouncil = {
   /**
    * The method allows to recover all the municipal councilors as visitor
-   * @menberof dataMapperCouncil
+   * @memberof dataMapperCouncil
    * @method getAllCouncil
    * @param {Number} townHallId
    * @returns {Array} Return all councilors
@@ -23,9 +23,9 @@ const dataMapperCouncil = {
   },
   /**
    * The method allows to create a members of the municipal council as administrator
-   * @menberof dataMapperCouncil
+   * @memberof dataMapperCouncil
    * @method postMemberCouncil
-   * @param {object} object
+   * @param {Object} object
    * @returns {void} post one new council member into database
    */
   async postMemberCouncil(object) {
@@ -39,10 +39,10 @@ const dataMapperCouncil = {
   },
   /**
    * The method allows to remove a member of the municipal council as administrator
-   * @menberof dataMapperCouncil
+   * @memberof dataMapperCouncil
    * @method deleteMember
-   * @param {number} id
-   * @returns {Array} delete a council member with id
+   * @param {Number} id
+   * @returns {void} delete a council member with id
    */
   async deleteMember(id) {
     const query = {
@@ -55,10 +55,10 @@ const dataMapperCouncil = {
   },
   /**
    * The method allows to update the information of a municipal councilor as administrator
-   * @menberof dataMapperCouncil
+   * @memberof dataMapperCouncil
    * @method modifyCouncil
-   * @param {object} object
-   * @returns {Array} modify a member
+   * @param {Object} object
+   * @returns {void} modify a member
    */
   async modifyCouncil(object) {
     const query = {

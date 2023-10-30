@@ -6,11 +6,13 @@ const { dataMapperArticle } = require(`../models/dataMapper/index`);
  * @exports adminControllerArticle
  */
 const adminControllerArticle = {
+
   /** The method returns the list of all items
-   * @menberof adminControllerArticle
+   * @memberof adminControllerArticle
    * @method allArticle
    * @param {Object} req
    * @param {Object} res
+   * @param {Function} next
    * @returns {Array} Return all articles
    */
   async allArticle(req, res, next) {
@@ -20,16 +22,17 @@ const adminControllerArticle = {
     if (articles) {
       res.json(articles).status(200);
     } else {
-      const err = new Error(`Impossible de récupérer la listes des articles`);
+      const err = new Error(`Impossible de récupérer la liste des articles`);
       next(err);
     }
   },
   /**
    * The method returns an article
-   * @menberof adminControllerArticle
+   * @memberof adminControllerArticle
    * @method oneArticle
    * @param {Object} req
    * @param {Object} res
+   * @param {Function} next
    * @returns {Object} Return one article
    */
   async oneArticle(req, res, next) {
@@ -39,15 +42,16 @@ const adminControllerArticle = {
     if (articles) {
       res.json(articles).status(200);
     } else {
-      const err = new Error(`Impossible de récupérer l'article !`);
+      const err = new Error(`Impossible de récupérer l'article`);
       next(err);
     }
   },
   /** The method allows you to delete an article as administrator
-   * @menberof adminControllerArticle
+   * @memberof adminControllerArticle
    * @method deleteArticle
    * @param {Object} req
    * @param {Object} res
+   * @param {Function} next
    * @returns void
    */
   async deleteArticle(req, res, next) {
@@ -68,10 +72,11 @@ const adminControllerArticle = {
   },
   /**
    * The method allows you to modify an article as administrator
-   * @menberof adminControllerArticle
+   * @memberof adminControllerArticle
    * @method modifyArticle
    * @param {Object} req
    * @param {Object} res
+   * @param {Function} next
    * @return void
    */
   async modifyArticle(req, res, next) {
@@ -102,7 +107,7 @@ const adminControllerArticle = {
     };
     const report = await dataMapperArticle.modifyArticle(values);
     if (report.rowCount) {
-      res.status(200).send(`La mise à jour est bien passée.`);
+      res.status(200).send(`La mise à jour s'est bien passée.`);
     } else {
       const err = new Error(`La mise à jour de l'article n'est pas possible.`);
       next(err);
@@ -110,10 +115,11 @@ const adminControllerArticle = {
   },
   /**
    * The method allows you to create an article as administrator
-   * @menberof adminControllerArticle
+   * @memberof adminControllerArticle
    * @method postArticle
    * @param {Object} req
    * @param {Object} res
+   * @param {Function} next
    * @returns void
    */
   async postArticle(req, res, next) {
@@ -137,9 +143,9 @@ const adminControllerArticle = {
     };
     const report = await dataMapperArticle.postArticle(values);
     if (report.rowCount) {
-      res.status(200).send(`L'article à été poster.`);
+      res.status(200).send(`Votre article a été publié`);
     } else {
-      const err = new Error(`Le post de l'article n'est pas possible.`);
+      const err = new Error(`Votre article ne peut être publié`);
       next(err);
     }
   },

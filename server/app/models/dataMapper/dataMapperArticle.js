@@ -8,7 +8,7 @@ const client = require(`../dbClient`);
 const dataMapperArticle = {
   /**
    * The method returns the list of all articles as visitor
-   * @menberof getAllArticleAdmin
+   * @memberof getAllArticleAdmin
    * @method getAllArticleAdmin
    * @param {Number} townHallId
    * @returns {Object} Return all articles
@@ -24,10 +24,10 @@ const dataMapperArticle = {
   },
   /**
    * The method returns one article as visitor
-   * @menberof getAllArticleAdmin
+   * @memberof getAllArticleAdmin
    * @method getOneArticle
    * @param {Number} articleId
-   * @returns Return one article
+   * @returns {Array} Return one article
    */
   async getOneArticle(articleId) {
     const query = {
@@ -40,10 +40,10 @@ const dataMapperArticle = {
   },
   /**
    * The method delete one article as administrator
-   * @menberof getAllArticleAdmin
+   * @memberof getAllArticleAdmin
    * @method deleteArticle
    * @param {Number} id
-   * @returns void
+   * @returns {void}
    */
   async deleteArticle(id) {
     const query = {
@@ -56,10 +56,10 @@ const dataMapperArticle = {
   },
   /**
    * The method allows to update an article as administrator
-   * @menberof getAllArticleAdmin
+   * @memberof getAllArticleAdmin
    * @method modifyArticle
-   * @param {object} object
-   * @returns void
+   * @param {Object} object
+   * @returns {void}
    */
   async modifyArticle(object) {
     const query = {
@@ -81,10 +81,10 @@ const dataMapperArticle = {
   },
   /**
    * The method allows you to post an article not as administrator
-   * @menberof getAllArticleAdmin
+   * @memberof getAllArticleAdmin
    * @method postArticle
-   * @param {object} object
-   * @returns void
+   * @param {Object} object
+   * @returns {void}
    */
   async postArticle(object) {
     const query = {
@@ -108,10 +108,10 @@ const dataMapperArticle = {
 
   /**
    * The method allows to retrieve all the articles as visitor
-   * @menberof getAllArticleAdmin
+   * @memberof getAllArticleAdmin
    * @method postArticle
-   * @param {object} object
-   * @returns {array}
+   * @param {Object} object
+   * @returns {Array}
    */
   async getAllArticle(townHallId) {
     const query = {

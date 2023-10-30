@@ -11,7 +11,7 @@ const client = require(`../models/dbClient`);
  */
 const DeleteIp = {
   /** this method uses cron to schedule it calls the database every day to check the 30-day ips
-   * @menberof deleteIp
+   * @membersof deleteIp
    * @method deleteIp
    * @returns void
    */
@@ -19,8 +19,8 @@ const DeleteIp = {
     cron.schedule(`59 23 * * *`, async () => {
       const query = {
         text: `UPDATE reporting
-                SET user_ip= '$1'
-                WHERE created_at < CAST(NOW() AS DATE) - 30 AND user_ip != '$2'`,
+                SET ip= '$1'
+                WHERE created_at < CAST(NOW() AS DATE) - 30 AND ip != '$2'`,
         values: [`null`, `null`],
       };
       await client.query(query);

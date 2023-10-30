@@ -9,12 +9,10 @@ const datamapper = {
   /**
    * Retrieve id of the town hall
    * By comparing the insee code of adminstrator and the town hall
-   * @menberof datamapper
+   * @memberof datamapper
    * @method getTownHallId
-   * @params {String} insee
+   * @param {String} insee
    * @return {Number} town_hall_id
-   * @param {Number} insee
-   * @returns {Number} Return town_hall_id
    */
   async getTownHallId(insee) {
     const query = {
@@ -31,14 +29,14 @@ const datamapper = {
   },
   /**
    * The method allows you to create an administrator
-   * @menberof datamapper
+   * @memberof datamapper
    * @method userSignup
    * @param {String} pseudo
-   * @param {Number} insee
+   * @param {String} insee
    * @param {String} hashPassword
    * @param {String} email
    * @param {Number} idTownHall
-   * @returns {Object} Returns object if insertion in database went well
+   * @returns {void}
    */
   async userSignup(pseudo, hashPassword, email, idTownHall) {
     const query = {
@@ -53,7 +51,7 @@ const datamapper = {
   },
   /**
    * The method allows you to log in as an admin
-   * @menberof datamapper
+   * @memberof datamapper
    * @method userLogin
    * @param {String} email
    * @param {String} hashPassword
@@ -71,7 +69,7 @@ const datamapper = {
   },
   /**
    * The method returns an administrator according to his email
-   * @menberof datamapper
+   * @memberof datamapper
    * @method getOneAdmin
    * @param {String} email
    * @returns {Object} Return administrator information

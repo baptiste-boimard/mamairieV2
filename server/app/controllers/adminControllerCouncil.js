@@ -1,4 +1,5 @@
 const dataMapperCouncil = require(`../models/dataMapper/dataMapperCouncil`);
+
 /**
  * @type {Object}
  * @export adminControllerCouncil
@@ -6,11 +7,12 @@ const dataMapperCouncil = require(`../models/dataMapper/dataMapperCouncil`);
  */
 const adminControllerCouncil = {
   /** The method returns the list of municipal councilors and the mayor as visitor
-   * @menberof adminControllerCouncil
+   * @memberof adminControllerCouncil
    * @method allCouncil
    * @param {Object} req
    * @param {Object} res
-   * @returns {Array} Return all municipal councilors
+   * @param {Function} next
+   * @returns {Array} Return the municipal staff
    */
   async allCouncil(req, res, next) {
     const townHallStaff = await dataMapperCouncil.getAllCouncil(
@@ -20,17 +22,18 @@ const adminControllerCouncil = {
       res.json(townHallStaff).status(200);
     } else {
       const err = new Error(
-        `Impossible de récupèrer les Conseillers.`,
+        `Impossible de récupèrer les conseillers.`,
       );
       next(err);
     }
   },
   /** this method posts a new advisor member as administrator
-   * @menberof adminControllerCouncil
+   * @memberof adminControllerCouncil
    * @method postOneMember
    * @param {Object} req
    * @param {Object} res
-   * @returns {void} post the new adviser
+   * @param {Function} next
+   * @returns void
    */
   async postOneMember(req, res, next) {
     const member = {
@@ -42,21 +45,21 @@ const adminControllerCouncil = {
     };
     const result = await dataMapperCouncil.postMemberCouncil(member);
     if (result.rowCount) {
-      res.status(200).send(`Votre ajout à été effectué.`);
+      res.status(200).send(`Votre ajout d'un conseiller à été effectué.`);
     } else {
       const err = new Error(
-        `La mise à jour n'est pas possible.`,
+        `L'ajout d'un conseiller a échoué`,
       );
       next(err);
     }
   },
   /**
-    this method removes a board member by his id as administrator
-  * @menberof adminControllerCouncil
+    this method removes a board member by his id
   * @method deleteMemberCouncil
   * @param {Object} req
   * @param {Object} res
-  * @returns {array}delete the board member
+  * @param {Function} next
+  * @returns void
   */
   async deleteMemberCouncil(req, res, next) {
     if (Number(req.params.town_hall_id) !== req.admin.town_hall_id) {
@@ -68,21 +71,22 @@ const adminControllerCouncil = {
     }
     const report = await dataMapperCouncil.deleteMember(req.params.town_hall_staff_id);
     if (report.rowCount) {
-      res.status(200).send(`Le Membre à bien été supprimer.`);
+      res.status(200).send(`Le conseiller à bien été supprimer.`);
     } else {
       const err = new Error(
-        `La suppression du membre n'est pas possible.`,
+        `La suppression du membre est impossible.`,
       );
       next(err);
     }
   },
   /**
-    this method modify a board member by his id as administrator
-  * @menberof adminControllerCouncil
+    this method modify a board member by his id
+  * @memberof adminControllerCouncil
   * @method modifyMemberCouncil
   * @param {Object} req
   * @param {Object} res
-  * @returns {array}modify the board member
+  * @param {Function} next
+  * @returns void
   */
 
   async modifyMemberCouncil(req, res, next) {
@@ -102,10 +106,10 @@ const adminControllerCouncil = {
     };
     const report = await dataMapperCouncil.modifyCouncil(values);
     if (report.rowCount) {
-      res.status(200).send(`La mise à jour du membre du conseiller, c'est bien passé.`);
+      res.status(200).send(`La mise à jour du conseiller est un succès`);
     } else {
       const err = new Error(
-        `La mise à jour n'est pas possible.`,
+        `La mise à jour à échouée`,
       );
       next(err);
     }

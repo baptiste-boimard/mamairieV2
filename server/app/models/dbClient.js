@@ -4,7 +4,7 @@ const { Pool } = require(`pg`);
 
 /**
  * The method allows to establish the connection to the database
- * @type{Object} object
+ * @type {Object} object
  * @namespace client
  * @export client
  * @class Pool
@@ -12,13 +12,12 @@ const { Pool } = require(`pg`);
 
 const client = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { // on demande d'accepter le fait qu'on ne soit pas en ssl (sécurité)
+  ssl: {
     rejectUnauthorized: false,
   },
 });
 
 // Local conenxion
-
 // const client = new Pool({
 //   host: process.env.PGHOST,
 //   user: process.env.PGUSER,

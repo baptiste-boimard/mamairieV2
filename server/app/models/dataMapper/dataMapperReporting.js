@@ -8,16 +8,14 @@ const client = require(`../dbClient`);
 const dataMapperReporting = {
   /**
    * the method allows to return all the reports as administrator
-   * @menberof dataMapperReporting
+   * @memberof dataMapperReporting
    * @method getAllReport
    * @param {Number} townHallId
    * @returns {Array} Array Returns all reports administrator
    */
   async getAllReport(townHallId) {
     const query = {
-      // text: `SELECT * FROM signalement
-      // eslint-disable-next-line max-len
-      //       WHERE mairie_id = $1 ORDER BY reporting_statut = $2, reporting_statut = $3, reporting_statut = $4, reporting_statut = $5 DESC;`,
+
       text: `SELECT * FROM reporting as r
               JOIN 
                 (SELECT reporting_category.reporting_category_id, reporting_category.name as reporting_category
@@ -41,7 +39,7 @@ const dataMapperReporting = {
   },
   /**
    * the method allows to return all the reports as visitor
-   * @menberof dataMapperReporting
+   * @memberof dataMapperReporting
    * @method getAllReportVisitor
    * @param {Number} townHallId
    * @returns {Array} Array Returns all reports visitor
@@ -72,7 +70,7 @@ const dataMapperReporting = {
   },
   /**
    * the method allows to return one report as administrator
-   * @menberof dataMapperReporting
+   * @memberof dataMapperReporting
    * @method getOneReport
    * @param {Number} townHallId
    * @returns {Object} Object Returns one report
@@ -80,7 +78,7 @@ const dataMapperReporting = {
   async getOneReport(reportId) {
     const query = {
       text: `SELECT * FROM reporting
-      WHERE reporting_id = $1;`,
+            WHERE reporting_id = $1;`,
       values: [reportId],
     };
     const data = await client.query(query);
@@ -88,7 +86,7 @@ const dataMapperReporting = {
   },
   /**
    * The method allows you to delete a report as administrator
-   * @menberof dataMapperReporting
+   * @memberof dataMapperReporting
    * @method deleteReport
    * @param {Number} id
    * @returns void
@@ -104,7 +102,7 @@ const dataMapperReporting = {
   },
   /**
    * The method is used to update a report as administrator
-   * @menberof dataMapperReporting
+   * @memberof dataMapperReporting
    * @method modifyReport
    * @param {Object} object
    * @returns void
@@ -112,21 +110,22 @@ const dataMapperReporting = {
   async modifyReport(object) {
     const query = {
       text: `UPDATE reporting
-      SET admin_text = $1, reporting_status_id = $2
-      WHERE reporting_id = $3; `,
-      // eslint-disable-next-line max-len
+            SET admin_text = $1, reporting_status_id = reporting_status.reporting_status_id
+            FROM reporting_status
+            WHERE reporting_status.name = $2 AND reporting_id = $3`,
       values: [
         object.admin_text,
         object.reporting_statut,
         object.reporting_id,
       ],
     };
+
     const data = await client.query(query);
     return data;
   },
   /**
    * The method is used to post a report as a visitor
-   * @menberof dataMapperReporting
+   * @memberof dataMapperReporting
    * @method PATCH
    * @param {Object} object
    * @returns void
@@ -134,9 +133,10 @@ const dataMapperReporting = {
   async postReport(object) {
     const query = {
       text: `INSERT INTO reporting
-            (title, email, phonenumber, firstname, lastname, description, ip, image, reporting_category_id, town_hall_id)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
-      // eslint-disable-next-line max-len
+            (title, email, phonenumber, firstname, lastname, description, ip, image, town_hall_id, reporting_category_id)
+            SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9, reporting_category.reporting_category_id
+            FROM reporting_category
+            WHERE reporting_category.name = $10`,
       values: [
         object.title,
         object.email,
@@ -146,45 +146,12 @@ const dataMapperReporting = {
         object.description,
         object.ip,
         object.image,
-        object.reporting_category_id,
         object.town_hall_id,
+        object.reporting_category,
       ],
     };
     const data = await client.query(query);
     return data;
-  },
-  /**
-   * Method to get reporting_status_id
-   * @memberof dataMapperReporting
-   * @method GET
-   * @param string statusName
-   * @returns number reporting_status_id
-   */
-  async getOneReportingStatus(statusName) {
-    const query = {
-      text: `SELECT reporting_status_id
-            FROM reporting_status
-            WHERE name = $1`,
-      values: [statusName],
-    };
-    const data = await client.query(query);
-    return data.rows[0];
-  },
-  /**
-   * Method to get reporting_category_name
-   * @memberof dataMapperReporting
-   * @param string categoryName
-   * @returns number reporting_category_id
-   */
-  async getOneReportingCategory(categoryName) {
-    const query = {
-      text: `SELECT reporting_category_id
-            FROM reporting_category
-            WHERE name = $1`,
-      values: [categoryName],
-    };
-    const data = await client.query(query);
-    return data.rows[0];
   },
 };
 
