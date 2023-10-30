@@ -34,7 +34,7 @@ const adminApi = (store) => (next) => (action) => {
           /** error on request
            * @setMessage set a message error
            */
-          store.dispatch(setMessage('coucou', error.response.data.error.message, false));
+          store.dispatch(setMessage(error.response.data.error.message, false));
         })
         .finally(() => {
           /** after success action

@@ -23,7 +23,7 @@ app.use(deleteIp.deleteIp);
 
 app.use(handleError);
 
-app.listen(PORT, () => {
+app.listen(PORT, `51.75.133.155`, () => {
   debug(`Listening on http://localhost:${PORT} `);
 });
 
