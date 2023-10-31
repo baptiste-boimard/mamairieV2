@@ -10,7 +10,7 @@ import { loading, setMessage } from '../actions/utilities';
 
 /** Instance of axios with options */
 const instance = axios.create({
-  baseURL: 'http://51.75.133.155:3030',
+  baseURL: process.env.SERVER_URL,
 });
 
 const api = (store) => (next) => (action) => {

@@ -1,6 +1,6 @@
 require(`dotenv`).config();
 const debug = require(`debug`)(`SERVER`);
-const PORT = process.env.PORT || 3030;
+const { PORT } = process.env.PORT;
 const express = require(`express`);
 const router = require(`./app/routers/router`);
 const handleError = require(`./app/handlers/handleError`);
@@ -23,7 +23,7 @@ app.use(deleteIp.deleteIp);
 
 app.use(handleError);
 
-app.listen(PORT, `51.75.133.155`, () => {
+app.listen(PORT, process.env.SERVER_URL, () => {
   debug(`Listening on http://localhost:${PORT} `);
 });
 

@@ -90,7 +90,7 @@ const adminController = {
 
       // Create Token
       // eslint-disable-next-line max-len
-      const accessToken = jwt.sign(user, `951b953c84e2793f553547af3def5757bee1a5d224811898a7e6522a38ee2544aa2aad0874e9922450f9e66bc26206a560b09859b8245f14dd8b8616f9d6bc9b`, { expiresIn: `1800s`, algorithm: `HS256` });
+      const accessToken = jwt.sign(user, process.env.DATABASE_URL, { expiresIn: `1800s`, algorithm: `HS256` });
 
       res.json({ accessToken, townHallId, adminId });
     } else {
