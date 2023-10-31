@@ -19,7 +19,7 @@ const authenticateToken = (req, res, next) => {
     err.status = 401;
     next(err);
   }
-  jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (error, user) => {
+  jwt.verify(token, `951b953c84e2793f553547af3def5757bee1a5d224811898a7e6522a38ee2544aa2aad0874e9922450f9e66bc26206a560b09859b8245f14dd8b8616f9d6bc9b`, (error, user) => {
     if (error) {
       const err = new Error(`Votre session a expiré, merci de vous reconnecter.`);
       err.status = 401;
